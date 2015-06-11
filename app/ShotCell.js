@@ -21,7 +21,6 @@ var ShotCell = React.createClass({
           <View style={styles.row}>
             <Image
               source={getImage.shotImage(this.props.shot)}
-              defaultSource={require('image!AuthorAvatar')}
               resizeMode="cover"
               style={styles.cellImage}
               accessible={true}
