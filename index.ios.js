@@ -15,14 +15,10 @@ var {
 } = React;
 
 
-var ShotList = require('./app/ShotList');
+var ShotList = require('./app/ShotList'),
+    Icon = require('FontAwesome');
 
 var DribbbleApp = React.createClass({
-  statics: {
-    title: '<TabBarIOS>',
-    description: 'Tab-based navigation.'
-  },
-
   getInitialState: function() {
     return {
       selectedTab: 'popular'
@@ -44,8 +40,10 @@ var DribbbleApp = React.createClass({
   render: function() {
     return (
       <TabBarIOS>
-        <TabBarIOS.Item
+        <Icon.TabBarItem
           title="Popular"
+          iconName="heart"
+          selectedIconName="heart"
           selected={this.state.selectedTab === 'popular'}
           onPress={() => {
             this.setState({
@@ -53,19 +51,23 @@ var DribbbleApp = React.createClass({
             });
           }}>
           {this._renderContent('popular')}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
+        </Icon.TabBarItem>
+        <Icon.TabBarItem
           title="Debuts"
+          iconName="trophy"
+          selectedIconName="trophy"
           selected={this.state.selectedTab === 'debuts'}
           onPress={() => {
             this.setState({
-              selectedTab: 'debuts'
+              selectedTab: 'debuts',
             });
           }}>
           {this._renderContent('debuts')}
-        </TabBarIOS.Item>
-        <TabBarIOS.Item
+        </Icon.TabBarItem>
+        <Icon.TabBarItem
           title="Everyone"
+          iconName="dribbble"
+          selectedIconName="dribbble"
           selected={this.state.selectedTab === 'everyone'}
           onPress={() => {
             this.setState({
@@ -73,7 +75,7 @@ var DribbbleApp = React.createClass({
             });
           }}>
           {this._renderContent('everyone')}
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
       </TabBarIOS>
     );
   }

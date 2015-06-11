@@ -10,7 +10,7 @@
     "react-native": "^0.4.2",
     "react-native-blur": "^0.4.2",
     "react-native-parallax-view": "^1.0.2",
-    "react-native-vector-icons": "^0.3.3",
+    "react-native-vector-icons": "^0.6.1",
     "react-timer-mixin": "^0.13.1"
   }
 }
