@@ -1,6 +1,6 @@
 /**
  * Dribbble App
- * TODO: add github link here
+ * Github url: https://github.com/catalinmiron/react-native-dribbble-app
  */
 'use strict';
 
