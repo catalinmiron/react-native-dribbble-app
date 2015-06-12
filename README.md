@@ -5,7 +5,7 @@ A [Dribbble](http://dribbble.com) app build with [React Native](https://github.c
 ![dribbble_app_screenshot](https://cloud.githubusercontent.com/assets/2805320/8113463/db61b072-1076-11e5-8aa2-52417f019ea0.jpg)
 
 Plugins used:
-- [HTML parser](https://github.com/iSimar/ParseHTML-React-Native)]
+- [HTML parser](https://github.com/iSimar/ParseHTML-React-Native)
 - [React native Parallax view](https://github.com/lelandrichardson/react-native-parallax-view)
 - [React native vector icons](https://github.com/oblador/react-native-vector-icons)
 
