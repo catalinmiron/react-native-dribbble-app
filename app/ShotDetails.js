@@ -7,6 +7,7 @@ var {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
   Component
 } = React;
@@ -15,10 +16,29 @@ var Icon = require('FontAwesome'),
     getImage = require('./helpers/getImage'),
     HTML = require('./vendor/HTML'),
     screen = require('Dimensions').get('window'),
-    ParallaxView = require('react-native-parallax-view');
+    ParallaxView = require('react-native-parallax-view'),
+    Modal = require('react-native-modal');
 
 
 var ShotDetails = React.createClass({
+  getInitialState: function() {
+    return {
+      isModalOpen: false
+    }
+  },
+
+  openModal: function() {
+    this.setState({
+      isModalOpen: true
+    });
+  },
+
+  closeModal: function() {
+    this.setState({
+      isModalOpen: false
+    });
+  },
+
   render: function() {
     var shotAuthor = this.props.shot.player;
 
@@ -26,6 +46,11 @@ var ShotDetails = React.createClass({
       <ParallaxView
         backgroundSource={getImage.shotImage(this.props.shot)}
         windowHeight={300}
+        header={(
+          <TouchableOpacity onPress={this.openModal}>
+            <View style={styles.invisibleView}></View>
+          </TouchableOpacity>
+        )}
         >
         <View>
           <View style={styles.headerContent}>
@@ -55,12 +80,62 @@ var ShotDetails = React.createClass({
             </Text>
           </View>
         </View>
+        <Modal isVisible={this.state.isModalOpen}
+               onClose={this.closeModal}
+               backdropType="blur"
+               backdropBlur="dark"
+               forceToFront={true}
+               customShowHandler={this._showModalTransition}
+               customHideHandler={this._hideModalTransition}
+               onPressBackdrop={this.closeModal}>
+          <Image source={getImage.shotImage(this.props.shot)}
+                 style={styles.customModalImage}
+                 resizeMode="contain"/>
+        </Modal>
       </ParallaxView>
     );
+  },
+
+  _showModalTransition: function(transition) {
+    transition('opacity', {
+      duration: 200,
+      begin: 0,
+      end: 1
+    });
+    transition('height', {
+      duration: 200,
+      begin: - screen.height * 2,
+      end: screen.height
+    });
+  },
+
+  _hideModalTransition: function(transition) {
+    transition('height', {
+      duration: 200,
+      begin: screen.height,
+      end: screen.height * 2,
+      reset: true
+    });
+    transition('opacity', {
+      duration: 200,
+      begin: 1,
+      end: 0
+    });
   },
 });
 
 var styles = StyleSheet.create({
+  invisibleView: {
+    flex: 1,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right:0
+  },
+  customModalImage: {
+    height: screen.height / 2
+  },
   headerContent: {
     flex: 1,
     paddingBottom: 20,
