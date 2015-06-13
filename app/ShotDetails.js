@@ -14,7 +14,7 @@ var {
 
 var Icon = require('FontAwesome'),
     getImage = require('./helpers/getImage'),
-    HTML = require('./vendor/HTML'),
+    HTML = require('react-native-htmlview'),
     screen = require('Dimensions').get('window'),
     ParallaxView = require('react-native-parallax-view'),
     Modal = require('react-native-modal');
@@ -76,7 +76,8 @@ var ShotDetails = React.createClass({
             </View>
             <View style={styles.separator} />
             <Text>
-              <HTML value={this.props.shot.description}/>
+              <HTML value={this.props.shot.description}
+                    stylesheet={styles}/>
             </Text>
           </View>
         </View>
@@ -125,6 +126,10 @@ var ShotDetails = React.createClass({
 });
 
 var styles = StyleSheet.create({
+  a: {
+    fontWeight: '300',
+    color: '#ea4c89'
+  },
   invisibleView: {
     flex: 1,
     position: 'absolute',
