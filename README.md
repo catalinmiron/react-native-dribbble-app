@@ -9,7 +9,7 @@ A [Dribbble](http://dribbble.com) app build with [React Native](https://github.c
 
 
 Plugins used:
-- [HTML parser](https://github.com/iSimar/ParseHTML-React-Native)
+- [HTML parser](https://github.com/jsdf/react-native-htmlview)
 - [React native Parallax view](https://github.com/lelandrichardson/react-native-parallax-view)
 - [React native vector icons](https://github.com/oblador/react-native-vector-icons)
 
