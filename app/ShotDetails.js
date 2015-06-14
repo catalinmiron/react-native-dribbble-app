@@ -8,6 +8,7 @@ var {
   StyleSheet,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   View,
   Component
 } = React;
@@ -19,6 +20,7 @@ var Icon = require('FontAwesome'),
     ParallaxView = require('react-native-parallax-view'),
     Modal = require('react-native-modal');
 
+var Player = require('./Player');
 
 var ShotDetails = React.createClass({
   getInitialState: function() {
@@ -40,7 +42,7 @@ var ShotDetails = React.createClass({
   },
 
   render: function() {
-    var shotAuthor = this.props.shot.player;
+    var player = this.props.shot.player;
 
     return (
       <ParallaxView
@@ -53,12 +55,15 @@ var ShotDetails = React.createClass({
         )}
         >
         <View>
-          <View style={styles.headerContent}>
-            <Image source={getImage.authorAvatar(shotAuthor)}
-                   style={styles.shotAuthorAvatar} />
-            <Text style={styles.shotTitle}>{this.props.shot.title}</Text>
-            <Text style={styles.shotAuthorContent}>by <Text style={styles.shotAuthor}>{shotAuthor.name}</Text></Text>
-          </View>
+          <TouchableHighlight style={styles.invisibleTouch}
+                              onPress={this.selectPlayer.bind(this, player)}>
+            <View style={styles.headerContent}>
+              <Image source={getImage.authorAvatar(player)}
+                     style={styles.playerAvatar} />
+              <Text style={styles.shotTitle}>{this.props.shot.title}</Text>
+              <Text style={styles.playerContent}>by <Text style={styles.player}>{player.name}</Text></Text>
+            </View>
+          </TouchableHighlight>
           <View style={styles.mainSection}>
             <View style={styles.shotDetailsRow}>
               <View style={styles.shotCounter}>
@@ -123,6 +128,14 @@ var ShotDetails = React.createClass({
       end: 0
     });
   },
+
+  selectPlayer: function(player: Object) {
+    this.props.navigator.push({
+      component: Player,
+      passProps: {player},
+      title: player.name
+    });
+  },
 });
 
 var styles = StyleSheet.create({
@@ -155,14 +168,14 @@ var styles = StyleSheet.create({
     color: '#ea4c89',
     lineHeight: 18
   },
-  shotAuthorContent: {
+  playerContent: {
     fontSize: 12
   },
-  shotAuthor: {
+  player: {
     fontWeight: '900',
     lineHeight: 18
   },
-  shotAuthorAvatar: {
+  playerAvatar: {
     borderRadius: 40,
     width: 80,
     height: 80,
