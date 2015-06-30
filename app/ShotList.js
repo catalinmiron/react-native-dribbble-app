@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var React = require('react-native');
+var React = require("react-native");
 var {
   ActivityIndicatorIOS,
   ListView,
@@ -10,19 +10,20 @@ var {
   View,
 } = React;
 
-var api = require('./helpers/api');
+var api = require("./helpers/api");
 
-var ShotCell = require('./ShotCell');
-var ShotDetails = require('./ShotDetails');
+var ShotCell = require("./ShotCell");
+var ShotDetails = require("./ShotDetails");
+var Loading = require("./Loading");
 
 // Results should be cached keyed by the query
 // with values of null meaning "being fetched"
 // and anything besides null and undefined
 // as the result of a valid query
 var resultsCache = {
-  dataForQuery: {},
-  nextPageNumberForQuery: {},
-  totalForQuery: {},
+  dataForQuery: [],
+  nextPageNumberForQuery: [],
+  totalForQuery: [],
 };
 
 var LOADING = {};
@@ -30,7 +31,7 @@ var LOADING = {};
 var ShotList = React.createClass({
   getDefaultProps: function() {
     return {
-      filter: ''
+      filter: ""
     };
   },
 
@@ -51,8 +52,6 @@ var ShotList = React.createClass({
   },
 
   getShots: function(query: string) {
-    this.setState({filter: query});
-
     var cachedResultsForQuery = resultsCache.dataForQuery[query];
     if (cachedResultsForQuery) {
       if (!LOADING[query]) {
@@ -74,8 +73,7 @@ var ShotList = React.createClass({
       isLoadingTail: false,
     });
 
-    fetch(api.getShotsByType(query, 1))
-      .then((response) => response.json())
+    api.getShotsByType(query, 1)
       .catch((error) => {
         LOADING[query] = false;
         resultsCache.dataForQuery[query] = undefined;
@@ -87,12 +85,12 @@ var ShotList = React.createClass({
       })
       .then((responseData) => {
         LOADING[query] = false;
-        resultsCache.dataForQuery[query] = responseData.shots;
+        resultsCache.dataForQuery[query] = responseData;
         resultsCache.nextPageNumberForQuery[query] = 2;
 
         this.setState({
           isLoading: false,
-          dataSource: this.getDataSource(responseData.shots),
+          dataSource: this.getDataSource(responseData),
         });
       })
       .done();
@@ -112,7 +110,7 @@ var ShotList = React.createClass({
   onEndReached: function() {
     var query = this.state.filter;
     if (!this.hasMore() || this.state.isLoadingTail) {
-      // We're already fetching or have all the elements so noop
+      // We"re already fetching or have all the elements so noop
       return;
     }
 
@@ -127,10 +125,8 @@ var ShotList = React.createClass({
     });
 
     var page = resultsCache.nextPageNumberForQuery[query];
-    fetch(api.getShotsByType(query, page))
-      .then((response) => response.json())
+    api.getShotsByType(query, page)
       .catch((error) => {
-        console.error(error);
         LOADING[query] = false;
         this.setState({
           isLoadingTail: false,
@@ -141,11 +137,11 @@ var ShotList = React.createClass({
 
         LOADING[query] = false;
         // We reached the end of the list before the expected number of results
-        if (!responseData.shots) {
+        if (!responseData) {
           resultsCache.totalForQuery[query] = shotsForQuery.length;
         } else {
-          for (var i in responseData.shots) {
-            shotsForQuery.push(responseData.shots[i]);
+          for (var i in responseData) {
+            shotsForQuery.push(responseData[i]);
           }
           resultsCache.dataForQuery[query] = shotsForQuery;
           resultsCache.nextPageNumberForQuery[query] += 1;
@@ -172,10 +168,9 @@ var ShotList = React.createClass({
   },
 
   renderFooter: function() {
-    if (!this.hasMore() || !this.state.isLoadingTail) {
-      return <View style={styles.scrollSpinner} />;
-    }
-    return <ActivityIndicatorIOS style={styles.scrollSpinner} />;
+    return <View style={styles.scrollSpinner}>
+      <Loading />
+    </View>;
   },
 
   renderRow: function(shot: Object)  {
@@ -211,33 +206,17 @@ var ShotList = React.createClass({
   },
 });
 
-var Loading = React.createClass({
-  render: function() {
-    return (
-      <View style={[styles.container, styles.centerText]}>
-        <ActivityIndicatorIOS
-            animating={this.props.isLoading}
-            style={styles.spinner}
-          />
-      </View>
-    );
-  }
-});
 
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
-  },
-  centerText: {
-    alignItems: 'center',
+    backgroundColor: "white",
+    flexDirection: "column",
+    justifyContent: "center"
   },
   separator: {
     height: 1,
-    backgroundColor: '#eeeeee',
-  },
-  spinner: {
-    width: 50,
+    backgroundColor: "#eeeeee",
   },
   scrollSpinner: {
     marginVertical: 20,
