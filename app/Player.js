@@ -1,27 +1,49 @@
-'use strict';
+"use strict";
 
-var React = require('react-native');
+var React = require("react-native");
 var {
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Component
+  Component,
+  ActivityIndicatorIOS,
+  ListView
 } = React;
 
-var Icon = require('FontAwesome'),
-    getImage = require('./helpers/getImage'),
-    screen = require('Dimensions').get('window'),
-    ParallaxView = require('react-native-parallax-view'),
-    Modal = require('react-native-modal');
+var Icon = require("FontAwesome"),
+    getImage = require("./helpers/getImage"),
+    HTML = require("react-native-htmlview"),
+    screen = require("Dimensions").get("window"),
+    ParallaxView = require("react-native-parallax-view"),
+    Modal = require("react-native-modal");
 
+var api = require("./helpers/api");
+
+var Loading = require("./Loading");
+var ShotCell = require("./ShotCell");
+var ShotDetails = require("./ShotDetails");
 
 var Player = React.createClass({
+
   getInitialState: function() {
     return {
-      isModalOpen: false
-    }
+      isModalOpen: false,
+      isLoading: true,
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      })
+    };
+  },
+
+  componentWillMount: function() {
+    api.getResources(this.props.player.shots_url).then((responseData) => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData),
+        isLoading: false
+      });
+    }).done();
   },
 
   openModal: function() {
@@ -40,7 +62,7 @@ var Player = React.createClass({
     return (
       <ParallaxView
       backgroundSource={getImage.authorAvatar(this.props.player)}
-      blur={'dark'}
+      blur={"dark"}
       windowHeight={160}
       header={(
         <TouchableOpacity onPress={this.openModal}>
@@ -52,20 +74,16 @@ var Player = React.createClass({
               <Text style={styles.playerName}>{this.props.player.name}</Text>
               <View style={styles.playerDetailsRow}>
                 <View style={styles.playerCounter}>
-                  <Text style={styles.playerCounterText}>Followers</Text>
+                  <Icon name="users" size={18} color="#fff"/>
                   <Text style={styles.playerCounterValue}> {this.props.player.followers_count} </Text>
                 </View>
                 <View style={styles.playerCounter}>
-                  <Text style={styles.playerCounterText}>Shots</Text>
+                  <Icon name="camera-retro" size={18} color="#fff"/>
                   <Text style={styles.playerCounterValue}> {this.props.player.shots_count} </Text>
                 </View>
                 <View style={styles.playerCounter}>
-                  <Text style={styles.playerCounterText}>Likes</Text>
+                  <Icon name="heart-o" size={18} color="#fff"/>
                   <Text style={styles.playerCounterValue}> {this.props.player.likes_count} </Text>
-                </View>
-                <View style={styles.playerCounter}>
-                  <Text style={styles.playerCounterText}>Comments</Text>
-                  <Text style={styles.playerCounterValue}> {this.props.player.comments_count} </Text>
                 </View>
               </View>
             </View>
@@ -73,9 +91,9 @@ var Player = React.createClass({
         </TouchableOpacity>
       )}
       >
-        <View style={styles.playerContent}>
-          <Text>Add more details about {this.props.player.name}</Text>
-        </View>
+      <View style={styles.shotList}>
+        {this.state.dataSource.length !== 0 ? this.renderShots() : <Loading />}
+      </View>
 
         <Modal isVisible={this.state.isModalOpen}
                onClose={this.closeModal}
@@ -92,13 +110,14 @@ var Player = React.createClass({
       </ParallaxView>
     );
   },
+
   _showModalTransition: function(transition) {
-    transition('opacity', {
+    transition("opacity", {
       duration: 200,
       begin: 0,
       end: 1
     });
-    transition('height', {
+    transition("height", {
       duration: 200,
       begin: - screen.height * 2,
       end: screen.height
@@ -106,76 +125,112 @@ var Player = React.createClass({
   },
 
   _hideModalTransition: function(transition) {
-    transition('height', {
+    transition("height", {
       duration: 200,
       begin: screen.height,
       end: screen.height * 2,
       reset: true
     });
-    transition('opacity', {
+    transition("opacity", {
       duration: 200,
       begin: 1,
       end: 0
     });
   },
+
+  renderShots: function() {
+    return <ListView
+      ref="listview"
+      dataSource={this.state.dataSource}
+      renderRow={this.renderRow}
+      contentContainerStyle={styles.listStyle}
+      horizontal={true}
+    />;
+  },
+
+  renderRow: function(shot)  {
+    return (
+      <ShotCell
+        onSelect={() => this.selectShot(shot)}
+        shot={shot}
+      />
+    );
+  },
+
+  selectShot: function(shot: Object) {
+    this.props.navigator.push({
+      component: ShotDetails,
+      passProps: {shot},
+      title: shot.title
+    });
+  },
 });
+
 var styles = StyleSheet.create({
+  listStyle: {
+    flex: 1,
+    backgroundColor: "red"
+  },
+  listView: {
+    flex: 1,
+    backgroundColor: "coral"
+  },
+  spinner: {
+    width: 50,
+  },
   headerContent: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
   },
   innerHeaderContent: {
     // Remove NavigatorHeight
     marginTop: -64,
-    alignItems: 'center'
+    alignItems: "center"
   },
   playerInfo: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-    flexDirection: 'row'
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    flexDirection: "row"
   },
   playerUsername: {
-    color: '#fff',
-    fontWeight: '300'
+    color: "#fff",
+    fontWeight: "300"
   },
   playerName: {
     fontSize: 14,
-    color: '#fff',
-    fontWeight: '900',
+    color: "#fff",
+    fontWeight: "900",
     lineHeight: 18
   },
   //Player details list
   playerDetailsRow: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
     width: screen.width / 2,
     marginTop: 20
   },
   playerCounter: {
     flex: 1,
-    alignItems: 'center'
-  },
-  playerCounterText: {
-    color: '#fff',
-    fontSize: 10,
-    justifyContent: 'space-between'
+    alignItems: "center"
   },
   playerCounterValue: {
-    color: '#fff',
-    fontWeight: '900'
+    color: "#fff",
+    fontWeight: "900",
+    fontSize: 14,
+    marginTop: 5,
   },
   playerAvatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: "#fff",
     marginBottom: 10
   },
   //Modal
