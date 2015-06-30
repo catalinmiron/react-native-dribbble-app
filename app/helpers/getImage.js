@@ -2,7 +2,7 @@
 
 module.exports = {
   shotImage: function(shot: Object): {uri: ?string} {
-    var uri = shot && shot.image_400_url ? shot.image_400_url : shot.image_url;
+    var uri = shot.images.normal ? shot.images.normal : shot.images.teaser;
     return {uri};
   },
   authorAvatar: function(player: Object): {uri: ?string} {
