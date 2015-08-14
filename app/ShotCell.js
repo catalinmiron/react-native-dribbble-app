@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-var React = require('react-native');
+var React = require("react-native");
 var {
   Image,
   PixelRatio,
@@ -10,8 +10,9 @@ var {
   View
 } = React;
 
-var getImage = require('./helpers/getImage'),
-    screen = require('Dimensions').get('window');
+var getImage = require("./helpers/getImage"),
+    { Dimensions } = require('react-native'),
+    screen = Dimensions.get('window');
 
 var ShotCell = React.createClass({
   render: function() {
@@ -21,7 +22,6 @@ var ShotCell = React.createClass({
           <View style={styles.row}>
             <Image
               source={getImage.shotImage(this.props.shot)}
-              resizeMode="cover"
               style={styles.cellImage}
               accessible={true}
             />
@@ -38,16 +38,17 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   row: {
-    backgroundColor: 'white',
-    flexDirection: 'column'
+    backgroundColor: "white",
+    flexDirection: "column"
   },
   cellImage: {
-    backgroundColor: 'transparent',
     height: 300,
-    width: screen.width
+    width: screen.width,
+    backgroundColor: "transparent",
+    resizeMode: "cover"
   },
   cellBorder: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
     // Trick to get the thinest line the device can display
     height: 1 / PixelRatio.get(),
     marginLeft: 4,
