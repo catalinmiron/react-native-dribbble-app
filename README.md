@@ -7,7 +7,9 @@ A [Dribbble](http://dribbble.com) app build with [React Native](https://github.c
 ####Preview
 ![dribbble_app_flow](https://cloud.githubusercontent.com/assets/2805320/8127634/25311eb0-1101-11e5-83aa-06dcc2d69da3.gif)
 
+
 __Updated version__
+
 ![dribbble-app-update](https://cloud.githubusercontent.com/assets/2805320/9274780/1ca63a6a-42a1-11e5-8570-2c2781ec721f.gif)
 
 
