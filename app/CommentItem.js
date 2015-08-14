@@ -11,7 +11,7 @@ var {
   Component
 } = React;
 
-var Icon = require("FontAwesome"),
+var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
     screen = require("Dimensions").get("window");

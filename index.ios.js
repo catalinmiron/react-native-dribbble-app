@@ -15,7 +15,7 @@ var {
 } = React;
 
 var ShotList = require("./app/ShotList"),
-    Icon = require("FontAwesome");
+    Icon = require("react-native-vector-icons/FontAwesome");
 
 var DribbbleApp = React.createClass({
   getInitialState: function() {

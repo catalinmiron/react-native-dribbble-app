@@ -11,7 +11,8 @@ var {
 } = React;
 
 var getImage = require("./helpers/getImage"),
-    screen = require("Dimensions").get("window");
+    { Dimensions } = require('react-native'),
+    screen = Dimensions.get('window');
 
 var ShotCell = React.createClass({
   render: function() {
@@ -21,7 +22,6 @@ var ShotCell = React.createClass({
           <View style={styles.row}>
             <Image
               source={getImage.shotImage(this.props.shot)}
-              resizeMode="cover"
               style={styles.cellImage}
               accessible={true}
             />
@@ -44,7 +44,8 @@ var styles = StyleSheet.create({
   cellImage: {
     height: 300,
     width: screen.width,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    resizeMode: "cover"
   },
   cellBorder: {
     backgroundColor: "rgba(0, 0, 0, 0.2)",

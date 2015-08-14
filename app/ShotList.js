@@ -12,9 +12,9 @@ var {
 
 var api = require("./helpers/api");
 
-var ShotCell = require("./ShotCell");
-var ShotDetails = require("./ShotDetails");
-var Loading = require("./Loading");
+var ShotCell = require("./ShotCell"),
+    ShotDetails = require("./ShotDetails"),
+    Loading = require("./Loading");
 
 // Results should be cached keyed by the query
 // with values of null meaning "being fetched"
@@ -192,7 +192,7 @@ var ShotList = React.createClass({
         renderRow={this.renderRow}
         onEndReached={this.onEndReached}
         automaticallyAdjustContentInsets={false}
-        keyboardDismissMode="onDrag"
+        keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps={true}
         showsVerticalScrollIndicator={false}
       />;

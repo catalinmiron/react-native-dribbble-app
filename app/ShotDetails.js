@@ -17,10 +17,11 @@ var {
 
 var api = require("./helpers/api");
 
-var Icon = require("FontAwesome"),
+var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
-    screen = require("Dimensions").get("window"),
+    { Dimensions } = require('react-native'),
+    screen = Dimensions.get('window'),
     ParallaxView = require("react-native-parallax-view"),
     Modal = require("react-native-modal");
 

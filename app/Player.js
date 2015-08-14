@@ -12,18 +12,19 @@ var {
   ListView
 } = React;
 
-var Icon = require("FontAwesome"),
+var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
-    screen = require("Dimensions").get("window"),
+    { Dimensions } = require('react-native'),
+    screen = Dimensions.get('window'),
     ParallaxView = require("react-native-parallax-view"),
     Modal = require("react-native-modal");
 
 var api = require("./helpers/api");
 
-var Loading = require("./Loading");
-var ShotCell = require("./ShotCell");
 var ShotDetails = require("./ShotDetails");
+var ShotCell = require("./ShotCell");
+var Loading = require("./Loading");
 
 var Player = React.createClass({
 
@@ -61,9 +62,9 @@ var Player = React.createClass({
   render: function() {
     return (
       <ParallaxView
+      windowHeight={260}
       backgroundSource={getImage.authorAvatar(this.props.player)}
       blur={"dark"}
-      windowHeight={160}
       header={(
         <TouchableOpacity onPress={this.openModal}>
           <View style={styles.headerContent}>
@@ -104,8 +105,7 @@ var Player = React.createClass({
                customHideHandler={this._hideModalTransition}
                onPressBackdrop={this.closeModal}>
           <Image source={getImage.authorAvatar(this.props.player)}
-                 style={styles.playerImageModal}
-                 resizeMode="contain"/>
+                 style={styles.playerImageModal}/>
         </Modal>
       </ParallaxView>
     );
@@ -140,24 +140,26 @@ var Player = React.createClass({
 
   renderShots: function() {
     return <ListView
-      ref="listview"
-      dataSource={this.state.dataSource}
+      ref="playerShots"
       renderRow={this.renderRow}
-      contentContainerStyle={styles.listStyle}
-      horizontal={true}
+      dataSource={this.state.dataSource}
+      automaticallyAdjustContentInsets={false}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps={true}
+      showsVerticalScrollIndicator={false}
     />;
   },
 
-  renderRow: function(shot)  {
-    return (
-      <ShotCell
-        onSelect={() => this.selectShot(shot)}
-        shot={shot}
-      />
-    );
+  renderRow: function(shot: Object)  {
+    return <ShotCell
+      onSelect={() => this.selectShot(shot)}
+      shot={shot}
+    />;
   },
 
   selectShot: function(shot: Object) {
+    console.log(shot);
+    debugger;
     this.props.navigator.push({
       component: ShotDetails,
       passProps: {shot},
@@ -185,8 +187,7 @@ var styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   innerHeaderContent: {
-    // Remove NavigatorHeight
-    marginTop: -64,
+    marginTop: 30,
     alignItems: "center"
   },
   playerInfo: {
@@ -235,7 +236,8 @@ var styles = StyleSheet.create({
   },
   //Modal
   playerImageModal: {
-    height: screen.height / 3
+    height: screen.height / 3,
+    resizeMode: "contain"
   },
   //playerContent
   playerContent: {
