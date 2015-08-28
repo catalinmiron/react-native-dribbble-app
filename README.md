@@ -1,3 +1,5 @@
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=55e0b1142844140100bcff33&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/55e0b1142844140100bcff33/build/latest)
+
 ###Dribbble app built with React Native
 
 A [Dribbble](http://dribbble.com) app build with [React Native](https://github.com/facebook/react-native).
