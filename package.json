@@ -15,5 +15,9 @@
   },
   "devDependencies": {
     "flow-bin": "0.17.0"
+  },
+  "engines": {
+    "node": "4.2.1",
+    "npm": "3.3.x"
   }
 }
