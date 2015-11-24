@@ -12,5 +12,8 @@
     "react-native-modal": "^0.3.10",
     "react-native-parallax-view": "^2.0.2",
     "react-native-vector-icons": "^0.8.5"
+  },
+  "devDependencies": {
+    "flow-bin": "0.17.0"
   }
 }
