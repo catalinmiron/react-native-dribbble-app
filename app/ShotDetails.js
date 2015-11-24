@@ -13,7 +13,8 @@ var {
   View,
   ListView,
   Component,
-  Dimensions
+  Dimensions,
+  Modal
 } = React;
 
 var api = require("./helpers/api");
@@ -22,8 +23,7 @@ var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
     screen = Dimensions.get('window'),
-    ParallaxView = require("react-native-parallax-view"),
-    Modal = require("react-native-modal");
+    ParallaxView = require("react-native-parallax-view");
 
 var Player = require("./Player");
 var CommentItem = require("./CommentItem");
@@ -113,14 +113,8 @@ var ShotDetails = React.createClass({
             </View>
           </View>
         </View>
-        <Modal isVisible={this.state.isModalOpen}
-               onClose={this.closeModal}
-               backdropType="blur"
-               backdropBlur="dark"
-               forceToFront={true}
-               customShowHandler={this._showModalTransition}
-               customHideHandler={this._hideModalTransition}
-               onPressBackdrop={this.closeModal}>
+        <Modal visible={this.state.isModalOpen}
+          onDismiss={this.closeModal}>
           <Image source={getImage.shotImage(this.props.shot)}
                  style={styles.customModalImage}
                  resizeMode="contain"/>
