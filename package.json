@@ -10,7 +10,7 @@
     "react-native-blur": "^0.7.6",
     "react-native-htmlview": "^0.2.0",
     "react-native-modal": "^0.3.10",
-    "react-native-parallax-view": "^2.0.2",
+    "react-native-parallax-view": "git+https://github.com/jesseruder/react-native-parallax-view.git",
     "react-native-vector-icons": "^0.8.5"
   },
   "devDependencies": {
