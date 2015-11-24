@@ -12,7 +12,8 @@ var {
   ActivityIndicatorIOS,
   View,
   ListView,
-  Component
+  Component,
+  Dimensions
 } = React;
 
 var api = require("./helpers/api");
@@ -20,7 +21,6 @@ var api = require("./helpers/api");
 var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
-    { Dimensions } = require('react-native'),
     screen = Dimensions.get('window'),
     ParallaxView = require("react-native-parallax-view"),
     Modal = require("react-native-modal");

@@ -9,13 +9,13 @@ var {
   View,
   Component,
   ActivityIndicatorIOS,
-  ListView
+  ListView,
+  Dimensions
 } = React;
 
 var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
-    { Dimensions } = require('react-native'),
     screen = Dimensions.get('window'),
     ParallaxView = require("react-native-parallax-view"),
     Modal = require("react-native-modal");
