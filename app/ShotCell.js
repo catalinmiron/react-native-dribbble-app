@@ -7,11 +7,11 @@ var {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
+  Dimensions
 } = React;
 
 var getImage = require("./helpers/getImage"),
-    { Dimensions } = require('react-native'),
     screen = Dimensions.get('window');
 
 var ShotCell = React.createClass({

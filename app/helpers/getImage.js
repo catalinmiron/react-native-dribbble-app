@@ -11,7 +11,7 @@ module.exports = {
       uri = player.avatar_url;
       return {uri};
     } else {
-      uri = require('image!AuthorAvatar');
+      uri = require('../../img/AuthorAvatar.png');
       return uri;
     }
   }

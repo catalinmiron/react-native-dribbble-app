@@ -9,16 +9,16 @@ var {
   View,
   Component,
   ActivityIndicatorIOS,
-  ListView
+  ListView,
+  Dimensions,
+  Modal
 } = React;
 
 var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
-    { Dimensions } = require('react-native'),
     screen = Dimensions.get('window'),
-    ParallaxView = require("react-native-parallax-view"),
-    Modal = require("react-native-modal");
+    ParallaxView = require("react-native-parallax-view");
 
 var api = require("./helpers/api");
 
@@ -95,47 +95,13 @@ var Player = React.createClass({
       <View style={styles.shotList}>
         {this.state.dataSource.length !== 0 ? this.renderShots() : <Loading />}
       </View>
-
-        <Modal isVisible={this.state.isModalOpen}
-               onClose={this.closeModal}
-               backdropType="blur"
-               backdropBlur="dark"
-               forceToFront={true}
-               customShowHandler={this._showModalTransition}
-               customHideHandler={this._hideModalTransition}
-               onPressBackdrop={this.closeModal}>
+        <Modal visible={this.state.isModalOpen}
+          onDismiss={this.closeModal}>
           <Image source={getImage.authorAvatar(this.props.player)}
                  style={styles.playerImageModal}/>
         </Modal>
       </ParallaxView>
     );
-  },
-
-  _showModalTransition: function(transition) {
-    transition("opacity", {
-      duration: 200,
-      begin: 0,
-      end: 1
-    });
-    transition("height", {
-      duration: 200,
-      begin: - screen.height * 2,
-      end: screen.height
-    });
-  },
-
-  _hideModalTransition: function(transition) {
-    transition("height", {
-      duration: 200,
-      begin: screen.height,
-      end: screen.height * 2,
-      reset: true
-    });
-    transition("opacity", {
-      duration: 200,
-      begin: 1,
-      end: 0
-    });
   },
 
   renderShots: function() {
