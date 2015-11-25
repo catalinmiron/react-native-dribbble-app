@@ -6,11 +6,17 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "react-native": "^0.8.0",
-    "react-native-blur": "^0.5.4",
+    "react-native": "^0.14.1",
+    "react-native-blur": "^0.7.6",
     "react-native-htmlview": "^0.2.0",
-    "react-native-modal": "^0.3.8",
-    "react-native-parallax-view": "^2.0.2",
-    "react-native-vector-icons": "^0.6.2"
+    "react-native-parallax-view": "git+https://github.com/jesseruder/react-native-parallax-view.git",
+    "react-native-vector-icons": "^0.8.5"
+  },
+  "devDependencies": {
+    "flow-bin": "0.17.0"
+  },
+  "engines": {
+    "node": "4.2.1",
+    "npm": "3.3.x"
   }
 }

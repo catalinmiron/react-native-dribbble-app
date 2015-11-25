@@ -8,13 +8,14 @@ var {
   Text,
   TouchableHighlight,
   View,
-  Component
+  Component,
+  Dimensions
 } = React;
 
 var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
     HTML = require("react-native-htmlview"),
-    screen = require("Dimensions").get("window");
+    screen = Dimensions.get('window');
 
 var CommentItem = React.createClass({
   getDefaultProps: function() {
