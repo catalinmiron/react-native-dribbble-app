@@ -21,6 +21,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		30177A1ECF0DBAE416E098F3 /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED6F46E21C4B9A40DABA1F4 /* BuddyBuildSDK.framework */; };
 		30B43EB51C04E81300985A33 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30B43EAD1C04E81300985A33 /* Entypo.ttf */; };
 		30B43EB61C04E81300985A33 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30B43EAE1C04E81300985A33 /* EvilIcons.ttf */; };
 		30B43EB71C04E81300985A33 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30B43EAF1C04E81300985A33 /* FontAwesome.ttf */; };
@@ -30,7 +31,11 @@
 		30B43EBB1C04E81300985A33 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30B43EB31C04E81300985A33 /* Octicons.ttf */; };
 		30B43EBC1C04E81300985A33 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 30B43EB41C04E81300985A33 /* Zocial.ttf */; };
 		30B43ECD1C04E8D300985A33 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30B43ECC1C04E8B000985A33 /* libRNVectorIcons.a */; };
+		6D292483E5346B27A74E2E34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF0CF7429913E1A235D27C99 /* SystemConfiguration.framework */; };
+		730166C1074210D0123B28CA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C502B03FBD6CCFC09870C695 /* AssetsLibrary.framework */; };
+		786024645FC915237655B50C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1407C99C4CFBEFDA33996EC /* CoreTelephony.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		AE27BAF0A74AA5DF8387E1C6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9138313B6C3B7416BE37F7A /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +156,11 @@
 		30B43EC71C04E8B000985A33 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		AED6F46E21C4B9A40DABA1F4 /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
+		BF0CF7429913E1A235D27C99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C1407C99C4CFBEFDA33996EC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		C502B03FBD6CCFC09870C695 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		D9138313B6C3B7416BE37F7A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +186,11 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				30177A1ECF0DBAE416E098F3 /* BuddyBuildSDK.framework in Frameworks */,
+				730166C1074210D0123B28CA /* AssetsLibrary.framework in Frameworks */,
+				AE27BAF0A74AA5DF8387E1C6 /* CoreText.framework in Frameworks */,
+				786024645FC915237655B50C /* CoreTelephony.framework in Frameworks */,
+				6D292483E5346B27A74E2E34 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +315,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7555EACED3C4735694CF3AE5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F46E21C4B9A40DABA1F4 /* BuddyBuildSDK.framework */,
+				C502B03FBD6CCFC09870C695 /* AssetsLibrary.framework */,
+				D9138313B6C3B7416BE37F7A /* CoreText.framework */,
+				C1407C99C4CFBEFDA33996EC /* CoreTelephony.framework */,
+				BF0CF7429913E1A235D27C99 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +369,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* DribbbleAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				7555EACED3C4735694CF3AE5 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -666,6 +694,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -683,6 +715,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
