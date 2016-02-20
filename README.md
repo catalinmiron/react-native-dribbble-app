@@ -25,7 +25,7 @@ Plugins used:
 
 ####How to run it locally
 
-- Clone this repo `git clone git@github.com:catalinmiron/react-native-dribbble-app.git`
+- Clone this repo `git clone https://github.com/catalinmiron/react-native-dribbble-app.git`
 - `cd react-native-dribbble-app`
 - run `npm install`
 - Open `DribbbleApp.xcodeproj` in `XCode`
