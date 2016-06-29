@@ -11,8 +11,8 @@ import React, {
   Dimensions
 } from 'react-native';
 
-const getImage = require("./helpers/getImage"),
-    screen = Dimensions.get('window');
+import * as getImage from "./helpers/getImage";
+const screen = Dimensions.get('window');
 
 export default class ShotCell extends Component {
   constructor(props) {
