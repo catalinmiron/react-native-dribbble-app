@@ -10,10 +10,10 @@ import React, {
   Dimensions
 } from 'react-native';
 
-const Icon = require("react-native-vector-icons/FontAwesome"),
-      getImage = require("./helpers/getImage"),
-      HTML = require("react-native-htmlview"),
-      screen = Dimensions.get('window');
+import * as getImage from './helpers/getImage';
+import { Icon } from 'react-native-vector-icons/FontAwesome';
+import HTML from 'react-native-htmlview';
+const screen = Dimensions.get('window');
 
 export default class CommentItem extends Component {
   constructor(props) {
