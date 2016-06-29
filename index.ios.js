@@ -13,8 +13,8 @@ import React, {
   Text
 } from 'react-native';
 
-const ShotList = require("./app/ShotList"),
-      Icon = require("react-native-vector-icons/FontAwesome");
+import ShotList from "./app/ShotList";
+const Icon = require("react-native-vector-icons/FontAwesome");
 
 export default class DribbbleApp extends Component {
   constructor(props) {
@@ -27,7 +27,6 @@ export default class DribbbleApp extends Component {
 
   //_renderContent(category: string, title: ?string) {
   _renderContent(category, title) {
-    console.log(arguments);
     return (
       <NavigatorIOS style={styles.wrapper}
         initialRoute={{
