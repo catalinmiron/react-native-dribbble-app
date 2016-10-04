@@ -53,7 +53,7 @@ export default class ShotList extends React.Component {
 
     componentWillMount() {
         this.getShots(this.state.filter);
-    },
+    }
 
     getShots(query: string) {
         var cachedResultsForQuery = resultsCache.dataForQuery[query];
@@ -206,8 +206,8 @@ export default class ShotList extends React.Component {
         {content}
       </View>
     );
-  },
-});
+  }
+};
 
 ShotList.defaultProps = {
     filter: ""

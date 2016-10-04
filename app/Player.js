@@ -1,7 +1,10 @@
-"use strict";
+/*
 
-var React = require("react-native");
-var {
+  @flow
+*/
+
+import React, {Component} from 'react';
+import {
   Image,
   StyleSheet,
   Text,
@@ -12,7 +15,7 @@ var {
   ListView,
   Dimensions,
   Modal
-} = React;
+} from 'react-native';
 
 var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
@@ -26,7 +29,7 @@ var ShotDetails = require("./ShotDetails");
 var ShotCell = require("./ShotCell");
 var Loading = require("./Loading");
 
-var Player = React.createClass({
+export default class Player extends Component {
 
   getInitialState: function() {
     return {
@@ -132,7 +135,7 @@ var Player = React.createClass({
       title: shot.title
     });
   },
-});
+};
 
 var styles = StyleSheet.create({
   listStyle: {
@@ -210,5 +213,3 @@ var styles = StyleSheet.create({
     padding: 20
   }
 });
-
-module.exports = Player;

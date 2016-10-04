@@ -1,7 +1,7 @@
-"use strict";
+//@flow
 
-var React = require("react-native");
-var {
+import React from 'react';
+import {
   Image,
   PixelRatio,
   ScrollView,
@@ -15,7 +15,7 @@ var {
   Component,
   Dimensions,
   Modal
-} = React;
+} from 'react-native';
 
 var api = require("./helpers/api");
 
@@ -29,7 +29,7 @@ var Player = require("./Player");
 var CommentItem = require("./CommentItem");
 var Loading = require("./Loading");
 
-var ShotDetails = React.createClass({
+export default class ShotDetails extends React.Component {
   getInitialState: function() {
     return {
       isModalOpen: false,
@@ -182,7 +182,7 @@ var ShotDetails = React.createClass({
     return <ActivityIndicatorIOS animating={this.state.isLoading}
                                  style={styles.spinner}/>;
   }
-});
+};
 
 var styles = StyleSheet.create({
   spinner: {

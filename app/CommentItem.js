@@ -1,7 +1,7 @@
-"use strict";
+//@flow
 
-var React = require("react-native");
-var {
+import React from 'react';
+import {
   Image,
   StyleSheet,
   PixelRatio,
@@ -10,43 +10,44 @@ var {
   View,
   Component,
   Dimensions
-} = React;
+} from 'react-native';
 
 var Icon = require("react-native-vector-icons/FontAwesome"),
     getImage = require("./helpers/getImage"),
-    HTML = require("react-native-htmlview"),
-    screen = Dimensions.get('window');
+    HTML = require("react-native-htmlview");
 
-var CommentItem = React.createClass({
-  getDefaultProps: function() {
-    return {
-      comments: []
-    }
-  },
+const screen = Dimensions.get('window');
 
-  render: function() {
-    return <View>
-      <TouchableHighlight onPress={this.props.onSelect.bind(this, this.props.comment)}
-                          underlayColor={"#f3f3f3"}>
-        <View>
-          <View style={styles.commentContent}>
-              <Image source={getImage.authorAvatar(this.props.comment.user)}
-                     style={styles.avatar}/>
-            <View style={styles.commentBody}>
-              <Text style={styles.userName}>
-                {this.props.comment.user.name}
-              </Text>
-              <Text style={styles.commentText}>
-                <HTML value={this.props.comment.body} />
-              </Text>
+export default class CommentItem extends React.Component {
+    render() {
+        return (
+            <View>
+                <TouchableHighlight onPress={this.props.onSelect.bind(this, this.props.comment)}
+                                  underlayColor={"#f3f3f3"}>
+                    <View>
+                      <View style={styles.commentContent}>
+                          <Image source={getImage.authorAvatar(this.props.comment.user)}
+                                 style={styles.avatar}/>
+                        <View style={styles.commentBody}>
+                          <Text style={styles.userName}>
+                            {this.props.comment.user.name}
+                          </Text>
+                          <Text style={styles.commentText}>
+                            <HTML value={this.props.comment.body} />
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={styles.cellBorder} />
+                    </View>
+              </TouchableHighlight>
             </View>
-          </View>
-          <View style={styles.cellBorder} />
-        </View>
-      </TouchableHighlight>
-    </View>;
-  }
-});
+        );
+    }
+};
+
+CommentItem.defaultProps = {
+    commments: []
+};
 
 var styles = StyleSheet.create({
   commentContent: {
@@ -80,5 +81,3 @@ var styles = StyleSheet.create({
     marginRight: 10
   }
 });
-
-module.exports = CommentItem;

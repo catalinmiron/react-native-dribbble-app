@@ -1,7 +1,7 @@
-"use strict";
+//@flow
 
-var React = require("react-native");
-var {
+import React from 'react';
+import {
   Image,
   PixelRatio,
   StyleSheet,
@@ -9,12 +9,12 @@ var {
   TouchableHighlight,
   View,
   Dimensions
-} = React;
+} from 'react-native';
 
 var getImage = require("./helpers/getImage"),
     screen = Dimensions.get('window');
 
-var ShotCell = React.createClass({
+export default class ShotCell extends React.Component {
   render: function() {
     return (
       <View>
@@ -31,7 +31,7 @@ var ShotCell = React.createClass({
       </View>
     );
   }
-});
+};
 
 var styles = StyleSheet.create({
   textContainer: {
