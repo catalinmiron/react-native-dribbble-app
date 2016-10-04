@@ -15,7 +15,7 @@ var getImage = require("./helpers/getImage"),
     screen = Dimensions.get('window');
 
 export default class ShotCell extends React.Component {
-  render: function() {
+  render() {
     return (
       <View>
         <TouchableHighlight onPress={this.props.onSelect}>

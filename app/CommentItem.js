@@ -8,7 +8,6 @@ import {
   Text,
   TouchableHighlight,
   View,
-  Component,
   Dimensions
 } from 'react-native';
 

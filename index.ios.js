@@ -1,30 +1,31 @@
 /**
  * Dribbble App
- * Github url: https://github.com/catalinmiron/react-native-dribbble-app
+ * Github url: https://github.com/future-challenger/react-native-dribbble-app
+ * @flow
  */
-"use strict";
 
-var React = require("react-native");
-var {
+import React from 'react';
+import {
   AppRegistry,
   NavigatorIOS,
   StyleSheet,
   TabBarIOS,
   View,
   Text
-} = React;
+} from 'react-native';
 
 var ShotList = require("./app/ShotList"),
     Icon = require("react-native-vector-icons/FontAwesome");
 
-var DribbbleApp = React.createClass({
-  getInitialState: function() {
-    return {
-      selectedTab: "default"
-    };
-  },
+export default class DribbbleApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedTab: "default"
+        };
+    }
 
-  _renderContent: function(category: string, title: ?string) {
+  _renderContent(category: string, title: ?string) {
     return (
       <NavigatorIOS style={styles.wrapper}
         initialRoute={{
@@ -34,9 +35,9 @@ var DribbbleApp = React.createClass({
         }}
       />
     );
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <TabBarIOS tintColor={"#ea4c89"}>
         <Icon.TabBarItem
@@ -90,7 +91,7 @@ var DribbbleApp = React.createClass({
       </TabBarIOS>
     );
   }
-});
+};
 
 var styles = StyleSheet.create({
   tabContent: {
@@ -107,5 +108,3 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent("DribbbleApp", () => DribbbleApp);
-
-module.exports = DribbbleApp;

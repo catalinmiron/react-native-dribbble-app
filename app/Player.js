@@ -10,7 +10,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Component,
   ActivityIndicatorIOS,
   ListView,
   Dimensions,
@@ -30,39 +29,39 @@ var ShotCell = require("./ShotCell");
 var Loading = require("./Loading");
 
 export default class Player extends Component {
+    constructor(props) {
+        super(props);
 
-  getInitialState: function() {
-    return {
-      isModalOpen: false,
-      isLoading: true,
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      })
-    };
-  },
+        //bind
+        this.closeModal = this.closeModal.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.renderShots = this.renderShots.bind(this);
+        this.renderRow = this.renderRow.bind(this);
+        this.selectShot = this.selectShot.bind(this);
+    }
 
-  componentWillMount: function() {
+  componentWillMount() {
     api.getResources(this.props.player.shots_url).then((responseData) => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(responseData),
         isLoading: false
       });
     }).done();
-  },
+  }
 
-  openModal: function() {
+  openModal() {
     this.setState({
       isModalOpen: true
     });
-  },
+  }
 
-  closeModal: function() {
+  closeModal() {
     this.setState({
       isModalOpen: false
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <ParallaxView
       windowHeight={260}
@@ -105,9 +104,9 @@ export default class Player extends Component {
         </Modal>
       </ParallaxView>
     );
-  },
+  }
 
-  renderShots: function() {
+  renderShots() {
     return <ListView
       ref="playerShots"
       renderRow={this.renderRow}
@@ -117,16 +116,16 @@ export default class Player extends Component {
       keyboardShouldPersistTaps={true}
       showsVerticalScrollIndicator={false}
     />;
-  },
+  }
 
-  renderRow: function(shot: Object)  {
+  renderRow(shot: Object)  {
     return <ShotCell
       onSelect={() => this.selectShot(shot)}
       shot={shot}
     />;
-  },
+  }
 
-  selectShot: function(shot: Object) {
+  selectShot(shot: Object) {
     console.log(shot);
     debugger;
     this.props.navigator.push({
@@ -134,7 +133,15 @@ export default class Player extends Component {
       passProps: {shot},
       title: shot.title
     });
-  },
+  }
+};
+
+Player.defaultProps = {
+    isModalOpen: false,
+    isLoading: true,
+    dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+    })
 };
 
 var styles = StyleSheet.create({

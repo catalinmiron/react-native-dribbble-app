@@ -30,38 +30,42 @@ var CommentItem = require("./CommentItem");
 var Loading = require("./Loading");
 
 export default class ShotDetails extends React.Component {
-  getInitialState: function() {
-    return {
-      isModalOpen: false,
-      isLoading: true,
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-    };
-  },
+    constructor(props) {
+        super(props);
 
-  openModal: function() {
+        //bind
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this._showModalTransition = this._showModalTransition.bind(this);
+        this._hideModalTransition = this._hideModalTransition.bidn(this);
+        this.selectPlayer = this.selectPlayer.bind(this);
+        this._renderCommentsList = this._renderCommentsList.bind(this);
+        this.renderRow = this.renderRow.bind(this);
+        this._renderLoading = this._renderLoading.bind(this);
+    }
+
+  openModal() {
     this.setState({
       isModalOpen: true
     });
-  },
+  }
 
-  closeModal: function() {
+  closeModal() {
     this.setState({
       isModalOpen: false
     });
-  },
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     api.getResources(this.props.shot.comments_url).then((responseData) => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(responseData),
         isLoading: false
       });
     }).done();
-  },
+  }
 
-  render: function() {
+  render() {
     var player = this.props.shot.user;
 
     return (
@@ -121,9 +125,9 @@ export default class ShotDetails extends React.Component {
         </Modal>
       </ParallaxView>
     );
-  },
+  }
 
-  _showModalTransition: function(transition) {
+  _showModalTransition(transition) {
     transition("opacity", {
       duration: 200,
       begin: 0,
@@ -134,9 +138,9 @@ export default class ShotDetails extends React.Component {
       begin: - screen.height * 2,
       end: screen.height
     });
-  },
+  }
 
-  _hideModalTransition: function(transition) {
+  _hideModalTransition(transition) {
     transition("height", {
       duration: 200,
       begin: screen.height,
@@ -148,17 +152,17 @@ export default class ShotDetails extends React.Component {
       begin: 1,
       end: 0
     });
-  },
+  }
 
-  selectPlayer: function(player: Object) {
+  selectPlayer(player: Object) {
     this.props.navigator.push({
       component: Player,
       passProps: {player},
       title: player.name
     });
-  },
+  }
 
-  _renderCommentsList: function() {
+  _renderCommentsList() {
     return <View style={styles.sectionSpacing}>
       <View style={styles.separator} />
       <Text style={styles.heading}>Comments</Text>
@@ -170,18 +174,27 @@ export default class ShotDetails extends React.Component {
         automaticallyAdjustContentInsets={false}
       />
     </View>
-  },
+  }
 
-  renderRow: function(comment: Object) {
+  renderRow(comment: Object) {
     return <CommentItem
       onSelect={() => this.selectPlayer(comment.user)}
       comment={comment} />;
-  },
+  }
 
-  _renderLoading: function() {
+  _renderLoading() {
     return <ActivityIndicatorIOS animating={this.state.isLoading}
                                  style={styles.spinner}/>;
   }
+
+};
+
+ShotDetails.defaultProps = {
+    isModalOpen: false,
+    isLoading: true,
+    dataSource: new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+    }),
 };
 
 var styles = StyleSheet.create({
