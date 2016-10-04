@@ -1,14 +1,14 @@
-"use strict";
+//@flow
 
-var React = require("react-native");
-var {
+import React from 'react';
+import {
   ActivityIndicatorIOS,
   ListView,
   StyleSheet,
   Text,
   TextInput,
   View,
-} = React;
+} from 'react-native';
 
 var api = require("./helpers/api");
 
@@ -21,14 +21,14 @@ var ShotCell = require("./ShotCell"),
 // and anything besides null and undefined
 // as the result of a valid query
 var resultsCache = {
-  dataForQuery: [],
-  nextPageNumberForQuery: [],
-  totalForQuery: [],
+    dataForQuery: [],
+    nextPageNumberForQuery: [],
+    totalForQuery: [],
 };
 
-var LOADING = {};
+let LOADING = {};
 
-var ShotList = React.createClass({
+let ShotList = React.createClass({
   getDefaultProps: function() {
     return {
       filter: ""
