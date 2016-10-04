@@ -23,6 +23,9 @@ export default class DribbbleApp extends React.Component {
         this.state = {
             selectedTab: "default"
         };
+
+        //bind
+        this._renderContent = this._renderContent.bind(this);
     }
 
   _renderContent(category: string, title: ?string) {

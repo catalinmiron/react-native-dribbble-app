@@ -11,9 +11,9 @@ import {
   Dimensions
 } from 'react-native';
 
-var Icon = require("react-native-vector-icons/FontAwesome"),
-    getImage = require("./helpers/getImage"),
-    HTML = require("react-native-htmlview");
+import Icon from "react-native-vector-icons/FontAwesome";
+import getImage from "./helpers/getImage";
+import HTML from "react-native-htmlview";
 
 const screen = Dimensions.get('window');
 

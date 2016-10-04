@@ -16,17 +16,16 @@ import {
   Modal
 } from 'react-native';
 
-var Icon = require("react-native-vector-icons/FontAwesome"),
-    getImage = require("./helpers/getImage"),
-    HTML = require("react-native-htmlview"),
-    screen = Dimensions.get('window'),
-    ParallaxView = require("react-native-parallax-view");
+import Icon from "react-native-vector-icons/FontAwesome";
+import getImage from "./helpers/getImage";
+import HTML from "react-native-htmlview";
+import ParallaxView from "react-native-parallax-view";
+import api from "./helpers/api";
+import ShotDetails from "./ShotDetails";
+import ShotCell from "./ShotCell";
+import Loading from "./Loading";
 
-var api = require("./helpers/api");
-
-var ShotDetails = require("./ShotDetails");
-var ShotCell = require("./ShotCell");
-var Loading = require("./Loading");
+const screen = Dimensions.get('window');
 
 export default class Player extends Component {
     constructor(props) {

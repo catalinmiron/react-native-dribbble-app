@@ -10,11 +10,11 @@ import {
     View,
 } from 'react-native';
 
-var api = require("./helpers/api");
+import api from "./helpers/api";
 
-var ShotCell = require("./ShotCell"),
-    ShotDetails = require("./ShotDetails"),
-    Loading = require("./Loading");
+import ShotCell from "./ShotCell";
+import ShotDetails from "./ShotDetails";
+import Loading from "./Loading";
 
 // Results should be cached keyed by the query
 // with values of null meaning "being fetched"
