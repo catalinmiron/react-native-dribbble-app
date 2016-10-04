@@ -12,7 +12,6 @@ import {
   ActivityIndicatorIOS,
   View,
   ListView,
-  Component,
   Dimensions,
   Modal
 } from 'react-native';
