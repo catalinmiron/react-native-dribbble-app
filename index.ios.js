@@ -14,8 +14,10 @@ import {
   Text
 } from 'react-native';
 
-var ShotList = require("./app/ShotList"),
-    Icon = require("react-native-vector-icons/FontAwesome");
+import ShotList from "./app/ShotList";
+import Icon from "react-native-vector-icons/FontAwesome";
+
+import DemoList from './app/test/demoList';
 
 export default class DribbbleApp extends React.Component {
     constructor(props) {
@@ -32,7 +34,8 @@ export default class DribbbleApp extends React.Component {
     return (
       <NavigatorIOS style={styles.wrapper}
         initialRoute={{
-          component: ShotList,
+          // component: ShotList,
+          component: DemoList,
           title: title,
           passProps: {filter: category}
         }}

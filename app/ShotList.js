@@ -1,4 +1,4 @@
-//@flow
+ //@flow
 
 import React from 'react';
 import {
@@ -10,7 +10,7 @@ import {
     View,
 } from 'react-native';
 
-import api from "./helpers/api";
+import * as api from "./helpers/api";
 
 import ShotCell from "./ShotCell";
 import ShotDetails from "./ShotDetails";

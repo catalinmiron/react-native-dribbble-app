@@ -17,10 +17,10 @@ import {
 } from 'react-native';
 
 import Icon from "react-native-vector-icons/FontAwesome";
-import getImage from "./helpers/getImage";
+import * as getImage from "./helpers/getImage";
 import HTML from "react-native-htmlview";
 import ParallaxView from "react-native-parallax-view";
-import api from "./helpers/api";
+import * as api from "./helpers/api";
 import ShotDetails from "./ShotDetails";
 import ShotCell from "./ShotCell";
 import Loading from "./Loading";
@@ -30,6 +30,14 @@ const screen = Dimensions.get('window');
 export default class Player extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+          isModalOpen: false,
+          isLoading: true,
+          dataSource: new ListView.DataSource({
+            rowHasChanged: (row1, row2) => row1 !== row2,
+          })
+        };
 
         //bind
         this.closeModal = this.closeModal.bind(this);

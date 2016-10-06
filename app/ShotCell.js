@@ -11,8 +11,9 @@ import {
   Dimensions
 } from 'react-native';
 
-var getImage = require("./helpers/getImage"),
-    screen = Dimensions.get('window');
+import * as getImage from './helpers/getImage';
+
+const screen = Dimensions.get('window');
 
 export default class ShotCell extends React.Component {
   render() {
@@ -54,5 +55,3 @@ var styles = StyleSheet.create({
     marginLeft: 4,
   },
 });
-
-module.exports = ShotCell;

@@ -16,32 +16,41 @@ import {
   Modal
 } from 'react-native';
 
-var api = require("./helpers/api");
+import Icon from "react-native-vector-icons/FontAwesome";
+import * as getImage from "./helpers/getImage";
+import HTML from "react-native-htmlview";
+import ParallaxView from "react-native-parallax-view";
 
-var Icon = require("react-native-vector-icons/FontAwesome"),
-    getImage = require("./helpers/getImage"),
-    HTML = require("react-native-htmlview"),
-    screen = Dimensions.get('window'),
-    ParallaxView = require("react-native-parallax-view");
+import * as api from "./helpers/api";
+import Player from "./Player";
+import CommentItem from "./CommentItem";
+// import Loading from "./Loading";
+import UNLoading, {LOADING_TYPE} from './test/universalLoading';
 
-var Player = require("./Player");
-var CommentItem = require("./CommentItem");
-var Loading = require("./Loading");
+const screen = Dimensions.get('window');
 
 export default class ShotDetails extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        //bind
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this._showModalTransition = this._showModalTransition.bind(this);
-        this._hideModalTransition = this._hideModalTransition.bidn(this);
-        this.selectPlayer = this.selectPlayer.bind(this);
-        this._renderCommentsList = this._renderCommentsList.bind(this);
-        this.renderRow = this.renderRow.bind(this);
-        this._renderLoading = this._renderLoading.bind(this);
-    }
+    this.state = {
+      isModalOpen: false,
+      isLoading: true,
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
+    };
+
+    //bind
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    // this._showModalTransition = this._showModalTransition.bind(this);
+    // this._hideModalTransition = this._hideModalTransition.bidn(this);
+    this.selectPlayer = this.selectPlayer.bind(this);
+    this._renderCommentsList = this._renderCommentsList.bind(this);
+    this.renderRow = this.renderRow.bind(this);
+    this._renderLoading = this._renderLoading.bind(this);
+  }
 
   openModal() {
     this.setState({
@@ -75,8 +84,7 @@ export default class ShotDetails extends React.Component {
           <TouchableOpacity onPress={this.openModal}>
             <View style={styles.invisibleView}></View>
           </TouchableOpacity>
-        )}
-        >
+        )}>
         <View>
           <TouchableHighlight style={styles.invisibleTouch}
                               onPress={this.selectPlayer.bind(this, player)}
@@ -110,9 +118,11 @@ export default class ShotDetails extends React.Component {
                     stylesheet={styles}/>
             </Text>
             <View>
-              {this.state.dataSource.getRowCount() === 0 ?
-                <Loading /> :
-                this._renderCommentsList()}
+              {
+                this.state.dataSource.getRowCount() === 0 ?
+                <UNLoading loadingType={LOADING_TYPE.Large} /> :
+                this._renderCommentsList()
+              }
             </View>
           </View>
         </View>
@@ -126,32 +136,32 @@ export default class ShotDetails extends React.Component {
     );
   }
 
-  _showModalTransition(transition) {
-    transition("opacity", {
-      duration: 200,
-      begin: 0,
-      end: 1
-    });
-    transition("height", {
-      duration: 200,
-      begin: - screen.height * 2,
-      end: screen.height
-    });
-  }
-
-  _hideModalTransition(transition) {
-    transition("height", {
-      duration: 200,
-      begin: screen.height,
-      end: screen.height * 2,
-      reset: true
-    });
-    transition("opacity", {
-      duration: 200,
-      begin: 1,
-      end: 0
-    });
-  }
+  // _showModalTransition(transition) {
+  //   transition("opacity", {
+  //     duration: 200,
+  //     begin: 0,
+  //     end: 1
+  //   });
+  //   transition("height", {
+  //     duration: 200,
+  //     begin: - screen.height * 2,
+  //     end: screen.height
+  //   });
+  // }
+  //
+  // _hideModalTransition(transition) {
+  //   transition("height", {
+  //     duration: 200,
+  //     begin: screen.height,
+  //     end: screen.height * 2,
+  //     reset: true
+  //   });
+  //   transition("opacity", {
+  //     duration: 200,
+  //     begin: 1,
+  //     end: 0
+  //   });
+  // }
 
   selectPlayer(player: Object) {
     this.props.navigator.push({
@@ -162,17 +172,18 @@ export default class ShotDetails extends React.Component {
   }
 
   _renderCommentsList() {
-    return <View style={styles.sectionSpacing}>
-      <View style={styles.separator} />
-      <Text style={styles.heading}>Comments</Text>
-      <View style={styles.separator} />
-      <ListView
-        ref="commentsView"
-        dataSource={this.state.dataSource}
-        renderRow={this.renderRow}
-        automaticallyAdjustContentInsets={false}
-      />
-    </View>
+    return
+      <View style={styles.sectionSpacing}>
+        <View style={styles.separator} />
+        <Text style={styles.heading}>Comments</Text>
+        <View style={styles.separator} />
+        <ListView
+          ref="commentsView"
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow}
+          automaticallyAdjustContentInsets={false}
+        />
+      </View>
   }
 
   renderRow(comment: Object) {
@@ -182,18 +193,11 @@ export default class ShotDetails extends React.Component {
   }
 
   _renderLoading() {
-    return <ActivityIndicatorIOS animating={this.state.isLoading}
-                                 style={styles.spinner}/>;
+    // return <ActivityIndicatorIOS animating={this.state.isLoading}
+    //                              style={styles.spinner}/>;
+    return <UNLoading loadingType={LOADING_TYPE.Large} />;
   }
 
-};
-
-ShotDetails.defaultProps = {
-    isModalOpen: false,
-    isLoading: true,
-    dataSource: new ListView.DataSource({
-      rowHasChanged: (row1, row2) => row1 !== row2,
-    }),
 };
 
 var styles = StyleSheet.create({
