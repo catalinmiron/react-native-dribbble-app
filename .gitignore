@@ -40,5 +40,9 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
+# VSCode
+.vscode
+tsconfig.json
+
 # tutorial stuff
 app/tutorial/

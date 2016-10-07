@@ -18,6 +18,8 @@ import ShotList from "./app/ShotList";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import DemoList from './app/test/demoList';
+// import DemoLayoutAnimation from './app/tutorial/DemoLayoutAnimation';
+import TutorialList from './app/tutorial/TutorialList';
 
 export default class DribbbleApp extends React.Component {
     constructor(props) {
@@ -30,12 +32,13 @@ export default class DribbbleApp extends React.Component {
         this._renderContent = this._renderContent.bind(this);
     }
 
-  _renderContent(category: string, title: ?string) {
+  _renderContent(category: string, title: ?string, comp: ?Object) {
+    let componnet = !comp ? DemoList : comp;
     return (
       <NavigatorIOS style={styles.wrapper}
         initialRoute={{
           // component: ShotList,
-          component: DemoList,
+          component: componnet,
           title: title,
           passProps: {filter: category}
         }}
@@ -93,6 +96,18 @@ export default class DribbbleApp extends React.Component {
             });
           }}>
           {this._renderContent("rebounds", "Rebounds")}
+        </Icon.TabBarItem>
+        <Icon.TabBarItem
+          title="Tutorials"
+          iconName="lightbulb-o"
+          selectedIconName="lightbulb-o"
+          selected={this.state.selectedTab === "tutorials"}
+          onPress={() => {
+            this.setState({
+              selectedTab: "tutorials",
+            });
+          }}>
+          {this._renderContent("tutorials", "Tutorials", TutorialList)}
         </Icon.TabBarItem>
       </TabBarIOS>
     );
