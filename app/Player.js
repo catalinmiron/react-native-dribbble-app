@@ -27,24 +27,24 @@ import Loading from "./Loading";
 const screen = Dimensions.get('window');
 
 export default class Player extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-          isModalOpen: false,
-          isLoading: true,
-          dataSource: new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-          })
-        };
+    this.state = {
+      isModalOpen: false,
+      isLoading: true,
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      })
+    };
 
-        //bind
-        this.closeModal = this.closeModal.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.renderShots = this.renderShots.bind(this);
-        this.renderRow = this.renderRow.bind(this);
-        this.selectShot = this.selectShot.bind(this);
-    }
+    //bind
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.renderShots = this.renderShots.bind(this);
+    this.renderRow = this.renderRow.bind(this);
+    this.selectShot = this.selectShot.bind(this);
+  }
 
   componentWillMount() {
     api.getResources(this.props.player.shots_url).then((responseData) => {
@@ -70,43 +70,43 @@ export default class Player extends Component {
   render() {
     return (
       <ParallaxView
-      windowHeight={260}
-      backgroundSource={getImage.authorAvatar(this.props.player)}
-      blur={"dark"}
-      header={(
-        <TouchableOpacity onPress={this.openModal}>
-          <View style={styles.headerContent}>
-            <View style={styles.innerHeaderContent}>
-              <Image source={getImage.authorAvatar(this.props.player)}
-              style={styles.playerAvatar} />
-              <Text style={styles.playerUsername}>{this.props.player.username}</Text>
-              <Text style={styles.playerName}>{this.props.player.name}</Text>
-              <View style={styles.playerDetailsRow}>
-                <View style={styles.playerCounter}>
-                  <Icon name="users" size={18} color="#fff"/>
-                  <Text style={styles.playerCounterValue}> {this.props.player.followers_count} </Text>
-                </View>
-                <View style={styles.playerCounter}>
-                  <Icon name="camera-retro" size={18} color="#fff"/>
-                  <Text style={styles.playerCounterValue}> {this.props.player.shots_count} </Text>
-                </View>
-                <View style={styles.playerCounter}>
-                  <Icon name="heart-o" size={18} color="#fff"/>
-                  <Text style={styles.playerCounterValue}> {this.props.player.likes_count} </Text>
+        windowHeight={260}
+        backgroundSource={getImage.authorAvatar(this.props.player) }
+        blur={"dark"}
+        header={(
+          <TouchableOpacity onPress={this.openModal}>
+            <View style={styles.headerContent}>
+              <View style={styles.innerHeaderContent}>
+                <Image source={getImage.authorAvatar(this.props.player) }
+                  style={styles.playerAvatar} />
+                <Text style={styles.playerUsername}>{this.props.player.username}</Text>
+                <Text style={styles.playerName}>{this.props.player.name}</Text>
+                <View style={styles.playerDetailsRow}>
+                  <View style={styles.playerCounter}>
+                    <Icon name="users" size={18} color="#fff"/>
+                    <Text style={styles.playerCounterValue}> {this.props.player.followers_count} </Text>
+                  </View>
+                  <View style={styles.playerCounter}>
+                    <Icon name="camera-retro" size={18} color="#fff"/>
+                    <Text style={styles.playerCounterValue}> {this.props.player.shots_count} </Text>
+                  </View>
+                  <View style={styles.playerCounter}>
+                    <Icon name="heart-o" size={18} color="#fff"/>
+                    <Text style={styles.playerCounterValue}> {this.props.player.likes_count} </Text>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-        </TouchableOpacity>
-      )}
-      >
-      <View style={styles.shotList}>
-        {this.state.dataSource.length !== 0 ? this.renderShots() : <Loading />}
-      </View>
+          </TouchableOpacity>
+        ) }
+        >
+        <View style={styles.shotList}>
+          {this.state.dataSource.length !== 0 ? this.renderShots() : <Loading />}
+        </View>
         <Modal visible={this.state.isModalOpen}
           onDismiss={this.closeModal}>
-          <Image source={getImage.authorAvatar(this.props.player)}
-                 style={styles.playerImageModal}/>
+          <Image source={getImage.authorAvatar(this.props.player) }
+            style={styles.playerImageModal}/>
         </Modal>
       </ParallaxView>
     );
@@ -121,14 +121,14 @@ export default class Player extends Component {
       keyboardDismissMode="on-drag"
       keyboardShouldPersistTaps={true}
       showsVerticalScrollIndicator={false}
-    />;
+      />;
   }
 
-  renderRow(shot: Object)  {
+  renderRow(shot: Object) {
     return <ShotCell
-      onSelect={() => this.selectShot(shot)}
+      onSelect={() => this.selectShot(shot) }
       shot={shot}
-    />;
+      />;
   }
 
   selectShot(shot: Object) {
@@ -136,18 +136,18 @@ export default class Player extends Component {
     debugger;
     this.props.navigator.push({
       component: ShotDetails,
-      passProps: {shot},
+      passProps: { shot },
       title: shot.title
     });
   }
 };
 
 Player.defaultProps = {
-    isModalOpen: false,
-    isLoading: true,
-    dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-    })
+  isModalOpen: false,
+  isLoading: true,
+  dataSource: new ListView.DataSource({
+    rowHasChanged: (row1, row2) => row1 !== row2,
+  })
 };
 
 var styles = StyleSheet.create({
