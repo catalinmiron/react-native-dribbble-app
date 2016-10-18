@@ -19,7 +19,8 @@ import React from 'react';
 import {
   View,
   Image,
-  Text
+  Text,
+  StyleSheet
 } from 'react-native';
 
 type Props = {
@@ -32,6 +33,8 @@ type Props = {
   onPress: ?() => void,
   onSelect: () => void,
 };
+
+const TAB_IMG_SIZE = 25;
 
 export default class TabItem extends React.Component {
   state: any;
@@ -50,41 +53,48 @@ export default class TabItem extends React.Component {
 
   _renderContent() {
     let selected = this.props.selected;
+    let tintStyle = {};
+    let source = this.props.icon;
 
     if(selected) {
       // check if selected icon is configed.
-      let source = this.props.selectedIcon;
-      let tintStyle = {};
-
+      this.props.selectedIcon;
       if(!source) {
         source = this.props.icon;
-        tintStyle.tintColor = this.props.tintColor;
       }
+      // tint color for image
+      tintStyle.tintColor = this.props.tintColor;
 
       return (
-        <Image
-          style={tintStyle}
-          source={source}
-        />
-        <Text style={itemSelected ? {color: 'blue'}: {color: this.props.tintColor}}>{this.props.title}</Text>
+        <View style={{alignItems: 'center', justifyContent: 'center', padding: 5}}>
+          <Image
+            style={[tintStyle, styles.icon]}
+            source={source}
+            resizeMode={Image.resizeMode.stretch}
+          />
+          <Text style={[styles.text, {color: this.props.tintColor}]}>
+            {this.props.title}
+          </Text>
+        </View>
       );
     } else {
+      tintStyle.tintColor = this.props.defaultTintColor;
       return (
-        <Image source={itemSelected ? this.props.selectedIcon : this.props.icon} />
-        <Text style={itemSelected ? {color: 'blue'}: {color: 'black'}}>{this.props.title}</Text>
+        <View style={{alignItems: 'center', justifyContent: 'center', padding: 5}}>
+          <Image source={source}
+            style={[tintStyle, styles.icon]}
+            resizeMode={Image.resizeMode.stretch} />
+          <Text style={[styles.text, {color: this.props.defaultTintColor}]}>
+            {this.props.title}
+          </Text>
+        </View>
       );
     }
   }
 
   render() {
-    let itemSelected = this.props.selected;
-
     return (
-      <View style={{alignItems: 'center', justifyContent: 'center', padding: 5}}>
-        {/* <Image source={itemSelected ? this.props.selectedIcon : this.props.icon} />
-        <Text style={itemSelected ? {color: 'blue'}: {color: 'black'}}>{this.props.title}</Text> */}
-        {this._renderContent()}
-      </View>
+      this._renderContent()
     );
   }
 }
@@ -99,3 +109,20 @@ TabItem.propTypes = {
 TabItem.defaultProps = {
   defaultTintColor: '#808080'
 };
+
+var styles = StyleSheet.create({
+  icon: {
+    width: TAB_IMG_SIZE,
+    height: TAB_IMG_SIZE
+  },
+  text: {
+    fontSize: 12,
+    marginTop: 3
+  }
+});
+
+/*
+{/* <Image source={itemSelected ? this.props.selectedIcon : this.props.icon} />
+<Text style={itemSelected ? {color: 'blue'}: {color: 'black'}}>{this.props.title}</Text> *
+/}
+*/

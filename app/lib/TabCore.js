@@ -45,11 +45,14 @@ type Props = {
 	onPress: ?(el: any)=>void
 };
 
+const TAB_DIC = {};
+
 export default class Tabs extends React.Component {
 	props: Props;
 	state: State;
 
-	_renderTabItem:() => ReactElement<*>;
+	_renderTabItem:(el: ReactElement<*>) => ReactElement<*>;
+	_renderTabView: (currentTab: string) => ReactElement<*>;
 	onSelect: (el: any) => void;
 	keyboardWillShow: (e: any) => void;
 	keyboardWillHide: (e: any) => void;
@@ -65,6 +68,7 @@ export default class Tabs extends React.Component {
 		this.tabView = null;
 
 		this._renderTabItem = this._renderTabItem.bind(this);
+		this._renderTabView = this._renderTabView.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.keyboardWillHide = this.keyboardWillHide.bind(this);
     this.keyboardWillShow = this.keyboardWillShow.bind(this);
@@ -95,6 +99,10 @@ export default class Tabs extends React.Component {
       Keyboard.addListener("keyboardDidShow", this.keyboardWillShow);
       Keyboard.addListener("keyboardDidHide", this.keyboardWillHide);
     }
+
+		React.Children.forEach(this.props.children, (el) => {
+			TAB_DIC[el.props.title.toLowerCase()] = el.props.children;
+		});
   }
 
   keyboardWillShow(e: any) {
@@ -105,11 +113,12 @@ export default class Tabs extends React.Component {
     this.setState({ keyboardUp: false });
   };
 
-	_renderTabItem() {
+	_renderTabItem(el) {
 		let element = null;
 		let selectedTab = this.props.selected;
-		
-		if(selectedTab == (el.props.name || el.key)) {
+
+		// if(selectedTab == (el.props.name || el.key)) {
+		if(el.props.selected) {
 			element = React.cloneElement(el, {selected: true, style: [el.props.style, this.props.selectedStyle, el.props.selectedStyle], tintColor: this.props.tintColor ? this.props.tintColor: this.props.defaultTintColor});
 		} else {
 			element = React.cloneElement(el, {selfcted: false, tintColor: this.props.tintColor ? this.props.tintColor: this.props.defaultTintColor});
@@ -118,9 +127,27 @@ export default class Tabs extends React.Component {
 		return element;
 	}
 
+	_renderTabView(currentTab) {
+		let navs = [];
+		for (let k in TAB_DIC) {
+			let v = TAB_DIC[k];
+			if (k != currentTab) {
+				navs.push(React.cloneElement(v, {...v.props, style: {width:0, height:0}}));
+			} else {
+				navs.push(v);
+			}
+		}
+
+		return (
+			<View style={{flex: 1}}>
+				{navs}
+			</View>
+		);
+	}
+
   render() {
 		const self = this;
-		// let selected = this.props.selected;
+		let selected = this.props.selected;
 		// if (!selected){
 		// 	React.Children.forEach(this.props.children.filter(c=>c), (el: any): void=>{
 		// 		if (!selected || el.props.initial){
@@ -131,18 +158,19 @@ export default class Tabs extends React.Component {
 		// 	});
 		// }
 
-		// let tabView = null;
+		let tabView = null;
 		let selectedTab = this.props.selected;
 		React.Children.forEach(this.props.children, (el) => {
-			console.log(`title:- ${el.props.title}, ${el.props.selected}`);
+			console.log(`title:- ${el.props.title}, ${el.props.selected}, ${!el.props.children ? 'NO View': 'View'}`);
 			if(el.props.selected) {
-				this.tabView = el.props.children;
+				tabView = el.props.children;
 			}
 		});
 		return (
       <View style={{flex: 1}}>
         {/* {this.state.currentTabView} */}
-				{this.tabView}
+				{/* {tabView} */}
+				{this._renderTabView(selectedTab)}
 
   			<View style={[styles.tabbarView, this.props.style, this.state.keyboardUp && styles.hidden]}>
 
@@ -153,7 +181,7 @@ export default class Tabs extends React.Component {
   						onPress={():boolean=>!self.props.locked && self.onSelect(el)}
   						onLongPress={()=>self.onSelect(el)}
   						activeOpacity={el.props.pressOpacity}>
-  							{this._renderTabItem()}
+  							{this._renderTabItem(el)}
   					</TouchableOpacity>
   				)}
   			</View>

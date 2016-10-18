@@ -1,4 +1,4 @@
-//@flow
+//@flow-weak
 
 import React from 'react';
 import {
@@ -32,9 +32,9 @@ export default class DemoList extends React.Component {
     };
 
     this.resultsCache = {
-        dataForQuery: [],
-        nextPageNumberForQuery: [],
-        totalForQuery: [],
+      dataForQuery: [],
+      nextPageNumberForQuery: [],
+      totalForQuery: [],
     };
 
     this.LOADING = {};
@@ -71,9 +71,9 @@ export default class DemoList extends React.Component {
       this.resultsCache.dataForQuery[query] = undefined;
 
       this.setState({
-          dataSource: this._getDataSource([]),
-          // isLoading: false,
-          isRefreshing: false
+        dataSource: this._getDataSource([]),
+        // isLoading: false,
+        isRefreshing: false
       });
     }).then((responseData) => {
       this.LOADING[query] = false;
@@ -100,29 +100,29 @@ export default class DemoList extends React.Component {
   _hasMore(): boolean {
     var query = this.state.filter;
     if (!this.resultsCache.dataForQuery[query]) {
-        return true;
+          return true;
     }
     return (
-        this.resultsCache.totalForQuery[query] !==
-          this.resultsCache.dataForQuery[query].length
+      this.resultsCache.totalForQuery[query] !==
+        this.resultsCache.dataForQuery[query].length
     );
   }
 
   _onEndReached() {
     var query = this.state.filter;
     if (!this._hasMore() || this.state.isLoadingTail || this.state.isRefreshing) {
-        // We"re already fetching or have all the elements so noop
-        return;
+      // We"re already fetching or have all the elements so noop
+      return;
     }
 
     if (this.LOADING[query]) {
-        return;
+      return;
     }
 
     this.LOADING[query] = true;
     this.setState({
-        queryNumber: this.state.queryNumber + 1,
-        isLoadingTail: true,
+      queryNumber: this.state.queryNumber + 1,
+      isLoadingTail: true,
     });
 
     let page = this.resultsCache.nextPageNumberForQuery[query];
@@ -151,18 +151,18 @@ export default class DemoList extends React.Component {
         this.LOADING[query] = false;
         // We reached the end of the list before the expected number of results
         if (!responseData) {
-            resultsCache.totalForQuery[query] = shotsForQuery.length;
+          resultsCache.totalForQuery[query] = shotsForQuery.length;
         } else {
-            for (var i in responseData) {
-                shotsForQuery.push(responseData[i]);
-            }
-            resultsCache.dataForQuery[query] = shotsForQuery;
-            resultsCache.nextPageNumberForQuery[query] += 1;
+          for (var i in responseData) {
+              shotsForQuery.push(responseData[i]);
+          }
+          resultsCache.dataForQuery[query] = shotsForQuery;
+          resultsCache.nextPageNumberForQuery[query] += 1;
         }
 
         this.setState({
-            isLoadingTail: false,
-            dataSource: this._getDataSource(resultsCache.dataForQuery[query]),
+          isLoadingTail: false,
+          dataSource: this._getDataSource(resultsCache.dataForQuery[query]),
         });
       })
       .done();
@@ -188,16 +188,16 @@ export default class DemoList extends React.Component {
 
   _pressRow(shot: Object) {
     this.props.navigator.push({
-        component: ShotDetails,
-        passProps: {shot},
-        title: shot.title
+      component: ShotDetails,
+      passProps: {shot},
+      title: shot.title
     });
   }
 
   _renderFooter() {
-      return <View style={styles.scrollSpinner}>
-          <UNActivityIndicator loadingType={LOADING_TYPE.Default} />
-      </View>;
+    return <View style={styles.scrollSpinner}>
+      <UNActivityIndicator loadingType={LOADING_TYPE.Default} />
+    </View>;
   }
 
   _renderView() {
@@ -236,11 +236,11 @@ export default class DemoList extends React.Component {
 };
 
 DemoList.defaultProps = {
-    filter: ""
+  filter: ""
 };
 
 DemoList.propTypes = {
-    filter: React.PropTypes.string
+  filter: React.PropTypes.string
 };
 
 const styles = StyleSheet.create({
