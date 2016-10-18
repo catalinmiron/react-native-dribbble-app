@@ -690,6 +690,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderstudio.Dribbble;
 				PRODUCT_NAME = DribbbleApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -713,6 +714,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.thunderstudio.Dribbble;
 				PRODUCT_NAME = DribbbleApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

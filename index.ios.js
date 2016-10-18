@@ -22,15 +22,15 @@ import DemoList from './app/test/demoList';
 import TutorialList from './app/tutorial/TutorialList';
 
 export default class DribbbleApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedTab: "default"
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+        selectedTab: "default"
+    };
 
-        //bind
-        this._renderContent = this._renderContent.bind(this);
-    }
+    //bind
+    this._renderContent = this._renderContent.bind(this);
+  }
 
   _renderContent(category: string, title: ?string, comp: ?Object) {
     let componnet = !comp ? DemoList : comp;
