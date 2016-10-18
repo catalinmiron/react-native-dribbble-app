@@ -48,6 +48,23 @@ export default class DribbbleApp extends React.Component {
 
   render() {
     return (
+      <Tabs
+        tintColor={"#ea4c89"}
+        selected={this.state.selectedTab}
+        style={{backgroundColor: 'white'}}
+        pressOpacity={1}>
+
+        <Tabs.Item
+          icon={require('./images/Home@2x.png')}
+          selectedIcon={require('./images/Home_selected@2x.png')}
+          title='First'
+          selected={this.state.selectedTab === 'first'}
+          onPress={() => {
+            this.setState({selectedTab: 'first'});
+          }}>
+          {this._renderContent("default", "All")}
+        </Tabs.Item>
+      </Tabs>
       <TabBarIOS tintColor={"#ea4c89"}>
         <Icon.TabBarItem
           title="All"

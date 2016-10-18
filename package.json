@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node_modules/react-native/packager/packager.sh"
+    "start": "node_modules/react-native/packager/packager.sh",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
     "react": "^15.3.2",
@@ -14,6 +15,6 @@
     "react-native-vector-icons": "^2.1.0"
   },
   "devDependencies": {
-    "flow-bin": "0.33.0"
+    "flow-bin": "^0.33.0"
   }
 }
