@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> dev
 
 ###Dribbble app built with React Native
 
