@@ -12,7 +12,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * @providesModule Tabs
- * @flow-weak
+ * @flow
  */
 
 import React from "react";
@@ -25,6 +25,7 @@ import {
 	TouchableOpacity,
 	Keyboard,
 	Platform,
+	Dimensions
 } from "react-native";
 
 import TabItem from './TabItem';
@@ -42,10 +43,15 @@ type Props = {
 	locked: boolean,
 	tintColor: string,
 	defaultTintColor: string,
+	navigatorType: "universal" | "IOS",
 	onPress: ?(el: any)=>void
 };
 
+const KEY_TAB: string = "tab";
+const KEY_ITEM: string = "item";
+
 const TAB_DIC = {};
+const SCREEN = Dimensions.get('window');
 
 export default class Tabs extends React.Component {
 	props: Props;
@@ -127,22 +133,57 @@ export default class Tabs extends React.Component {
 		return element;
 	}
 
+	/*
+	 * If you dont identify which Navigator you are using, it will be treated as
+	 * `Navigator`. Or you can specify it as `NavigatorIOS`
+	*/
 	_renderTabView(currentTab) {
-		let navs = [];
-		for (let k in TAB_DIC) {
-			let v = TAB_DIC[k];
-			if (k != currentTab) {
-				navs.push(React.cloneElement(v, {...v.props, style: {width:0, height:0}}));
-			} else {
-				navs.push(v);
+		// if (this.props.navigatorType && this.props.navigatorType === 'IOS') {
+			let navs = [];
+			for (let k in TAB_DIC) {
+				let v = TAB_DIC[k];
+				if (k != currentTab) {
+					navs.push(
+						// React.cloneElement(v, {...v.props, style: {width:0, height:0}, key: `${k}-${KEY_TAB}`})
+						React.cloneElement(v, {...v.props, style: {flex: 0,width:0, height:0}, key: `${k}-${KEY_TAB}`})
+					);
+				} else {
+					navs.push(
+						// v
+						React.cloneElement(v, {...v.props, style: {flex: 1}, key: `${k}-${KEY_TAB}`})
+					);
+				}
 			}
-		}
 
-		return (
-			<View style={{flex: 1}}>
-				{navs}
-			</View>
-		);
+			return (
+				<View style={{flex: 1, flexDirection: 'row'}}>
+					{navs}
+				</View>
+			);
+		// }
+
+		// let tabView = null;
+		//
+		// //TODO: This iteration of chldren components is not cool.
+		// // React.Children.forEach(this.props.children, (el) => {
+		// // 	if (el.props.selected) {
+		// // 		console.log(`selected:- ${el.props.title}`);
+		// // 		tabView = el.props.children;
+		// // 	}
+		// // });
+		// let children = this.props.children;
+		// for(let i in this.props.children) {
+		// 	if(children[i].props.selected) {
+		// 		tabView = children[i].props.children;
+		// 		break;
+		// 	}
+		// }
+		//
+		// return (
+		// 	// <View style={{flex: 1}}>
+		// 		tabView
+		// 	// </View>
+		// );
 	}
 
   render() {
@@ -175,7 +216,8 @@ export default class Tabs extends React.Component {
   			<View style={[styles.tabbarView, this.props.style, this.state.keyboardUp && styles.hidden]}>
 
   				{React.Children.map(this.props.children.filter(c=>c), (el)=>
-  					<TouchableOpacity key={el.props.name + "touch"}
+  					<TouchableOpacity
+							key={`${el.props.title}-${KEY_ITEM}`}
   						testID={el.props.testID}
   						style={[styles.iconView, this.props.iconStyle, (el.props.name || el.key) == selected ? this.props.selectedIconStyle || el.props.selectedIconStyle || {} : {} ]}
   						onPress={():boolean=>!self.props.locked && self.onSelect(el)}
