@@ -46,3 +46,6 @@ tsconfig.json
 
 # tutorial stuff
 app/tutorial/
+
+# test code
+test.js
