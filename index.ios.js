@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Navigator,
   View,
+  Image,
   Text,
   TouchableOpacity,
   TouchableHighlight
@@ -22,6 +23,8 @@ import Tabs from './app/lib/TabCore';
 import DemoList from './app/test/demoList';
 // import DemoLayoutAnimation from './app/tutorial/DemoLayoutAnimation';
 import TutorialList from './app/tutorial/TutorialList';
+
+const THEME_COLOR = '#ea4c89';
 
 export default class DribbbleApp extends React.Component {
   constructor(props) {
@@ -102,7 +105,7 @@ export default class DribbbleApp extends React.Component {
     return (
       <Tabs
         navigatorType='universal'
-        tintColor={"#ea4c89"}
+        tintColor={THEME_COLOR}
         selected={this.state.selectedTab}
         style={{backgroundColor: 'white'}}
         pressOpacity={1}>
@@ -231,37 +234,6 @@ export default class DribbbleApp extends React.Component {
             }
           />
         </Tabs.Item>
-        <Tabs.Item
-          icon={require('./img/light.png')}
-          title='Tutorials'
-          selected={this.state.selectedTab === 'tutorials'}
-          onPress={() => {
-            this.setState({selectedTab: 'tutorials'});
-          }}>
-          {/* {this._renderContent("tutorials", "Tutorials", TutorialList)} */}
-          <Navigator
-            style={styles.wrapper}
-            initialRoute={{
-              title: 'Tutorials',
-        			component: TutorialList,
-        			index: 0,
-        			passProps: {
-                filter: 'tutorials'
-        			}
-            }}
-            renderScene={(route, navigator) => {
-              if (route.component) {
-            		return React.createElement(route.component
-            			, {...this.props, ...route.passProps, navigator, route});
-            	}
-            }}
-            navigationBar={
-              <Navigator.NavigationBar
-                routeMapper={NavigationBarRouteMapper}
-                style={{backgroundColor: 'white', opacity: 0.8}} />
-            }
-          />
-        </Tabs.Item>
       </Tabs>
     );
   }
@@ -271,13 +243,18 @@ var NavigationBarRouteMapper = {
 	LeftButton(route, navigator, index, navState) {
 		if (index > 0) {
 			return (
-				<TouchableHighlight style={{ marginTop: 10 }} onPress={() => {
-					if (index > 0) {
-						navigator.pop();
-					}
-				} }>
-					<Text>Back</Text>
-				</TouchableHighlight>
+        <View style={{flex: 1, justifyContent:'center', marginLeft: 10}}>
+  				<TouchableOpacity style={{  }} onPress={() => {
+    				if (index > 0) {
+    						navigator.pop();
+    					}
+    				}}>
+  					<Image
+              source={require('./img/back_arrow.png')}
+              style={{width: 8, height: 15, tintColor: THEME_COLOR}}
+              resizeMode='stretch' />
+  				</TouchableOpacity>
+        </View>
 			)
 		} else {
 			return null
@@ -291,7 +268,7 @@ var NavigationBarRouteMapper = {
 	Title(route, navigator, index, navState) {
 		return (
 			<TouchableOpacity style={{ flex: 1, justifyContent: 'center' }}>
-				<Text style={{ color: 'blue', margin: 10, fontSize: 16 }}>
+				<Text style={{ color: THEME_COLOR, margin: 10, fontSize: 16 }}>
 					{route.title}
         </Text>
 			</TouchableOpacity>
@@ -375,6 +352,11 @@ var styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1
+  },
+
+  navBar: {
+    borderBottomColor: '#48209A',
+    borderBottomWidth: 1
   }
 });
 

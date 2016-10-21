@@ -34,7 +34,7 @@ type Props = {
   onSelect: () => void,
 };
 
-const TAB_IMG_SIZE = 25;
+const TAB_IMG_SIZE = 28;
 
 export default class TabItem extends React.Component {
   state: any;
@@ -116,7 +116,7 @@ var styles = StyleSheet.create({
     height: TAB_IMG_SIZE
   },
   text: {
-    fontSize: 12,
+    fontSize: 10,
     marginTop: 3
   }
 });
