@@ -20,6 +20,7 @@ Plugins used:
 
 ####Improvements
 - [ ] run it on Android, this is what I'm doing
+- [ ] support offline display with redux and related middlewares
 - [x] add icons in TabBar
 - [ ] refactor 'facebook-movies' fetching logic
 - [x] add author view
