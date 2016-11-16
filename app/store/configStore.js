@@ -3,8 +3,12 @@
 
   @flow
 */
-import {applyMiddleware, createStore} from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 
 
 
 var isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent
+
+export default function configureStore(onComplete: ?() => void) {
+  // const store = autoRe
+}
