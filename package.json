@@ -7,8 +7,9 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
+    "flow-bin": "^0.35.0",
     "react": "^15.3.2",
-    "react-native": "0.34",
+    "react-native": "0.37",
     "react-native-blur": "^1.0.1",
     "react-native-htmlview": "^0.5.0",
     "react-native-parallax-view": "^2.0.5",
