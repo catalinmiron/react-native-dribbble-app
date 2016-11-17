@@ -8,13 +8,14 @@
   },
   "dependencies": {
     "react": "^15.3.2",
-    "react-native": "0.34",
+    "react-native": "0.37",
     "react-native-blur": "^1.0.1",
     "react-native-htmlview": "^0.5.0",
     "react-native-parallax-view": "^2.0.5",
-    "react-native-vector-icons": "^2.1.0"
+    "react-native-vector-icons": "^2.1.0",
+    "rxjs": "^5.0.0-rc.3"
   },
   "devDependencies": {
-    "flow-bin": "^0.33.0"
+    "flow-bin": "^0.35.0"
   }
 }
