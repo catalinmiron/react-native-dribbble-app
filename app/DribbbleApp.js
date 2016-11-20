@@ -28,9 +28,13 @@ import TutorialList from './app/tutorial/TutorialList';
 
 const THEME_COLOR = '#ea4c89';
 
+const mapStateToProps = (state) => {
+  selectedTab: 'all',
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    
+    dispatch, //explicit map
   }
 }
 
@@ -93,20 +97,6 @@ export default class DribbbleApp extends React.Component {
         }
       />
     );
-
-    // return (
-    //   <View style={{flex: 1}}>
-    //     <NavigatorIOS
-    //       style={styles.wrapper}
-    //       initialRoute={{
-    //         // component: ShotList,
-    //         component: componnet,
-    //         title: title,
-    //         passProps: {filter: category}
-    //       }}
-    //     />
-    //   </View>
-    // );
   }
 
   render() {
@@ -303,4 +293,4 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent("DribbbleApp", () => DribbbleApp);
+export default connect(mapStateToProps, mapDispatchToProps)(DribbbleApp)
