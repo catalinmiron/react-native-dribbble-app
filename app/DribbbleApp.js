@@ -28,6 +28,12 @@ import TutorialList from './app/tutorial/TutorialList';
 
 const THEME_COLOR = '#ea4c89';
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    
+  }
+}
+
 export default class DribbbleApp extends React.Component {
   constructor(props) {
     super(props);
