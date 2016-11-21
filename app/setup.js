@@ -7,6 +7,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import DribbbleApp from './DribbbleApp'
+import configureStore from './store/configureStore'
 
 function setup(): ReactClass<{}> {
   class Root extends React.Component {
@@ -32,6 +33,13 @@ function setup(): ReactClass<{}> {
   }
 
   return Root
+}
+
+global.LOG = (...args) => {
+  console.log('/------------------------------\\');
+  console.log(...args);
+  console.log('\\------------------------------/');
+  return args[args.length - 1];
 }
 
 export default {setup}

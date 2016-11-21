@@ -49,3 +49,6 @@ app/tutorial/
 
 # test code
 test.js
+
+# yarn
+yarn.lock
