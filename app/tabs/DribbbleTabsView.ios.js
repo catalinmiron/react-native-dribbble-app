@@ -8,7 +8,7 @@ import {
   Navigator
 } from 'react-native'
 
-// import AppColors from 'AppColors'
+import AppColors from '../common/AppColors'
 import { connect } from 'react-redux'
 import { switchTab } from '../actions'
 
@@ -21,7 +21,7 @@ class DribbbleTabsView extends React.Component {
 
   render() {
     return (
-      <TabBarIOS tintColor={F8Colors.darkText}>
+      <TabBarIOS tintColor={AppColors.darkText}>
         <TabBarItemIOS
           title="Schedule"
           selected={this.props.tab === 'schedule'}
@@ -82,4 +82,4 @@ const mapDispatchToProps = dispatch => ({
   onTabSelect: (tab) => dispatch(switchTab(tab))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DirbbbleTabsView)
+export default connect(mapStateToProps, mapDispatchToProps)(DribbbleTabsView)
