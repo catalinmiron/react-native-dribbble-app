@@ -7,7 +7,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import DribbbleApp from './DribbbleApp'
-import configureStore from './store/configureStore'
+import configureStore from './store/configStore'
 
 function setup(): ReactClass<{}> {
   class Root extends React.Component {
