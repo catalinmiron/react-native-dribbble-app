@@ -5,11 +5,14 @@
   @flow
 */
 import React from 'react'
+import { View, Text, } from 'react-native'
 import { Provider } from 'react-redux'
 import DribbbleApp from './DribbbleApp'
-import configureStore from './store/configureStore'
+import configureStore from './store/configStore'
 
-function setup(): ReactClass<{}> {
+export default function setup(): ReactClass<{}> {
+  console.log('>>>setup')
+
   class Root extends React.Component {
     state: {isLoading: boolean, store: any}
 
@@ -24,6 +27,7 @@ function setup(): ReactClass<{}> {
       if (this.state.isLoading) {
         return null;
       }
+
       return (
         <Provider store={this.state.store}>
           <DribbbleApp />
@@ -42,4 +46,4 @@ global.LOG = (...args) => {
   return args[args.length - 1];
 }
 
-export default {setup}
+// export default {setup}

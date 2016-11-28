@@ -3,7 +3,8 @@
 
   @flow
 */
-import { AppRegistry } from 'react-native'
+import React from 'react'
+import { AppRegistry, View, Text, StyleSheet} from 'react-native'
 import setup from './app/setup'
 
-AppRegistry.registerComponent('Dribbble', setup)
+AppRegistry.registerComponent('DribbbleApp', setup)

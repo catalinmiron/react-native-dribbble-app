@@ -18,27 +18,23 @@ import {
 
 import { connect } from 'react-redux'
 
-import ShotList from "./app/ShotList";
+import ShotList from "./ShotList";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-import Tabs from './app/lib/TabCore';
-import DemoList from './app/test/demoList';
-// import DemoLayoutAnimation from './app/tutorial/DemoLayoutAnimation';
-import TutorialList from './app/tutorial/TutorialList';
+import Tabs from './lib/TabCore';
+import DemoList from './test/demoList';
 
 const THEME_COLOR = '#ea4c89';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => ({
   selectedTab: 'all',
-}
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch, //explicit map
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  dispatch, //explicit map
+})
 
-export default class DribbbleApp extends React.Component {
+class DribbbleApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -109,7 +105,7 @@ export default class DribbbleApp extends React.Component {
         pressOpacity={1}>
 
         <Tabs.Item
-          icon={require('./img/dribbble.png')}
+          icon={require('../img/dribbble.png')}
           title='All'
           selected={this.state.selectedTab === 'all'}
           onPress={() => {
@@ -140,7 +136,7 @@ export default class DribbbleApp extends React.Component {
           />
         </Tabs.Item>
         <Tabs.Item
-          icon={require('./img/trophy.png')}
+          icon={require('../img/trophy.png')}
           title='Debuts'
           selected={this.state.selectedTab === 'debuts'}
           onPress={() => {
@@ -171,7 +167,7 @@ export default class DribbbleApp extends React.Component {
           />
         </Tabs.Item>
         <Tabs.Item
-          icon={require('./img/heart.png')}
+          icon={require('../img/heart.png')}
           title='Animated'
           selected={this.state.selectedTab === 'animated'}
           onPress={() => {
@@ -202,7 +198,7 @@ export default class DribbbleApp extends React.Component {
           />
         </Tabs.Item>
         <Tabs.Item
-          icon={require('./img/light.png')}
+          icon={require('../img/light.png')}
           title='Rebounds'
           selected={this.state.selectedTab === 'rebounds'}
           onPress={() => {
@@ -248,7 +244,7 @@ var NavigationBarRouteMapper = {
     					}
     				}}>
   					<Image
-              source={require('./img/back_arrow.png')}
+              source={require('../img/back_arrow.png')}
               style={{width: 8, height: 15, tintColor: THEME_COLOR}}
               resizeMode='stretch' />
   				</TouchableOpacity>
