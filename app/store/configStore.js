@@ -5,10 +5,10 @@
 */
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk'
-import createLogger fom 'redux-logger'
+import createLogger from 'redux-logger'
 // import { persistStore, autoRehydrate } from 'redux-persist'
 // import { AsyncStorage } from 'react-native'
-import reducers from './reducers'
+import reducers from '../reducers'
 
 var logger = createLogger({
   predicate: (getState, action) => isDebuggingInChrome,
@@ -28,5 +28,5 @@ export default function configureStore(onComplete: ?() => void) {
     window.store = store
   }
 
-  return store 
+  return store
 }
