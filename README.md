@@ -22,6 +22,8 @@ Plugins used:
 - [ ] run it on Android, this is what I'm doing
 - [ ] support offline display with redux and related middlewares
 - [x] add icons in TabBar
+  - [ ] maybe use [react native flux router](https://github.com/aksonov/react-native-router-flux) do the tab and nav thing, or
+  - [ ] ios use tab and android use drawer view
 - [ ] refactor 'facebook-movies' fetching logic
 - [x] add author view
 - [x] fetch comments in shot details
