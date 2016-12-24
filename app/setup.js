@@ -12,6 +12,7 @@ import configureStore from './store/configStore'
 
 export default function setup(): ReactClass<{}> {
   console.log('>>>setup')
+  console.disableYellowBox = true
 
   class Root extends React.Component {
     state: {isLoading: boolean, store: any}
@@ -27,7 +28,7 @@ export default function setup(): ReactClass<{}> {
       if (this.state.isLoading) {
         return null;
       }
-
+      console.log(`===>render root component`)
       return (
         <Provider store={this.state.store}>
           <DribbbleApp />

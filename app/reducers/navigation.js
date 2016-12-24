@@ -14,14 +14,16 @@ type State = {
 }
 
 const initialState = {
-  tab: 'All'
+  tab: 'All',
+  info: 'Info',
 }
 
 export default function navigation(state: State = initialState, action): State {
-  switch(action.type) {
-    case 'SWITCH_TAB'
-      return { ...state, tab: action.tab }
-    default:
-      return initialState
+  if(action.type === 'SWITCH_TAB') {
+    return {...state, tab: action.tab}
   }
+  if(action.type === 'SWITCH_ONE') {
+    return {...state, info: action.info}
+  }
+  return state
 }

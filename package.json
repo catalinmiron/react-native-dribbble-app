@@ -7,8 +7,8 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "dependencies": {
-    "react": "~15.3.1",
-    "react-native": "0.36",
+    "react": "~15.4.0-rc.4",
+    "react-native": "^0.39.2",
     "react-native-blur": "^1.0.1",
     "react-native-htmlview": "^0.5.0",
     "react-native-parallax-view": "^2.0.5",
