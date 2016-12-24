@@ -1,12 +1,12 @@
-var React = require("react-native");
-var {
+import React from 'react';
+import {
   ActivityIndicatorIOS,
   StyleSheet,
   View,
-} = React;
+} from 'react-native';
 
-var Loading = React.createClass({
-  render: function() {
+export default class Loading extends React.Component {
+  render() {
     return (
       <View style={[styles.container, styles.centerText]}>
         <ActivityIndicatorIOS
@@ -16,7 +16,7 @@ var Loading = React.createClass({
       </View>
     );
   }
-});
+};
 
 var styles = StyleSheet.create({
   container: {
@@ -32,5 +32,3 @@ var styles = StyleSheet.create({
     width: 50,
   }
 });
-
-module.exports = Loading;

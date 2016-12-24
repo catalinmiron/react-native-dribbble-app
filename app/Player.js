@@ -1,110 +1,118 @@
-"use strict";
+/*
+  @flow
+*/
 
-var React = require("react-native");
-var {
+import React, {Component} from 'react';
+import {
   Image,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Component,
   ActivityIndicatorIOS,
   ListView,
   Dimensions,
   Modal
-} = React;
+} from 'react-native';
 
-var Icon = require("react-native-vector-icons/FontAwesome"),
-    getImage = require("./helpers/getImage"),
-    HTML = require("react-native-htmlview"),
-    screen = Dimensions.get('window'),
-    ParallaxView = require("react-native-parallax-view");
+import Icon from "react-native-vector-icons/FontAwesome";
+import * as getImage from "./helpers/getImage";
+import HTML from "react-native-htmlview";
+import ParallaxView from "react-native-parallax-view";
+import * as api from "./helpers/api";
+import ShotDetails from "./ShotDetails";
+import ShotCell from "./ShotCell";
+import Loading from "./Loading";
 
-var api = require("./helpers/api");
+const screen = Dimensions.get('window');
 
-var ShotDetails = require("./ShotDetails");
-var ShotCell = require("./ShotCell");
-var Loading = require("./Loading");
+export default class Player extends Component {
+  constructor(props) {
+    super(props);
 
-var Player = React.createClass({
-
-  getInitialState: function() {
-    return {
+    this.state = {
       isModalOpen: false,
       isLoading: true,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-  },
 
-  componentWillMount: function() {
+    //bind
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.renderShots = this.renderShots.bind(this);
+    this.renderRow = this.renderRow.bind(this);
+    this.selectShot = this.selectShot.bind(this);
+  }
+
+  componentWillMount() {
     api.getResources(this.props.player.shots_url).then((responseData) => {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(responseData),
         isLoading: false
       });
     }).done();
-  },
+  }
 
-  openModal: function() {
+  openModal() {
     this.setState({
       isModalOpen: true
     });
-  },
+  }
 
-  closeModal: function() {
+  closeModal() {
     this.setState({
       isModalOpen: false
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <ParallaxView
-      windowHeight={260}
-      backgroundSource={getImage.authorAvatar(this.props.player)}
-      blur={"dark"}
-      header={(
-        <TouchableOpacity onPress={this.openModal}>
-          <View style={styles.headerContent}>
-            <View style={styles.innerHeaderContent}>
-              <Image source={getImage.authorAvatar(this.props.player)}
-              style={styles.playerAvatar} />
-              <Text style={styles.playerUsername}>{this.props.player.username}</Text>
-              <Text style={styles.playerName}>{this.props.player.name}</Text>
-              <View style={styles.playerDetailsRow}>
-                <View style={styles.playerCounter}>
-                  <Icon name="users" size={18} color="#fff"/>
-                  <Text style={styles.playerCounterValue}> {this.props.player.followers_count} </Text>
-                </View>
-                <View style={styles.playerCounter}>
-                  <Icon name="camera-retro" size={18} color="#fff"/>
-                  <Text style={styles.playerCounterValue}> {this.props.player.shots_count} </Text>
-                </View>
-                <View style={styles.playerCounter}>
-                  <Icon name="heart-o" size={18} color="#fff"/>
-                  <Text style={styles.playerCounterValue}> {this.props.player.likes_count} </Text>
+        windowHeight={260}
+        backgroundSource={getImage.authorAvatar(this.props.player) }
+        blur={"dark"}
+        header={(
+          <TouchableOpacity onPress={this.openModal}>
+            <View style={styles.headerContent}>
+              <View style={styles.innerHeaderContent}>
+                <Image source={getImage.authorAvatar(this.props.player) }
+                  style={styles.playerAvatar} />
+                <Text style={styles.playerUsername}>{this.props.player.username}</Text>
+                <Text style={styles.playerName}>{this.props.player.name}</Text>
+                <View style={styles.playerDetailsRow}>
+                  <View style={styles.playerCounter}>
+                    <Icon name="users" size={18} color="#fff"/>
+                    <Text style={styles.playerCounterValue}> {this.props.player.followers_count} </Text>
+                  </View>
+                  <View style={styles.playerCounter}>
+                    <Icon name="camera-retro" size={18} color="#fff"/>
+                    <Text style={styles.playerCounterValue}> {this.props.player.shots_count} </Text>
+                  </View>
+                  <View style={styles.playerCounter}>
+                    <Icon name="heart-o" size={18} color="#fff"/>
+                    <Text style={styles.playerCounterValue}> {this.props.player.likes_count} </Text>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-        </TouchableOpacity>
-      )}
-      >
-      <View style={styles.shotList}>
-        {this.state.dataSource.length !== 0 ? this.renderShots() : <Loading />}
-      </View>
+          </TouchableOpacity>
+        ) }
+        >
+        <View style={styles.shotList}>
+          {this.state.dataSource.length !== 0 ? this.renderShots() : <Loading />}
+        </View>
         <Modal visible={this.state.isModalOpen}
           onDismiss={this.closeModal}>
-          <Image source={getImage.authorAvatar(this.props.player)}
-                 style={styles.playerImageModal}/>
+          <Image source={getImage.authorAvatar(this.props.player) }
+            style={styles.playerImageModal}/>
         </Modal>
       </ParallaxView>
     );
-  },
+  }
 
-  renderShots: function() {
+  renderShots() {
     return <ListView
       ref="playerShots"
       renderRow={this.renderRow}
@@ -113,26 +121,34 @@ var Player = React.createClass({
       keyboardDismissMode="on-drag"
       keyboardShouldPersistTaps={true}
       showsVerticalScrollIndicator={false}
-    />;
-  },
+      />;
+  }
 
-  renderRow: function(shot: Object)  {
+  renderRow(shot: Object) {
     return <ShotCell
-      onSelect={() => this.selectShot(shot)}
+      onSelect={() => this.selectShot(shot) }
       shot={shot}
-    />;
-  },
+      />;
+  }
 
-  selectShot: function(shot: Object) {
+  selectShot(shot: Object) {
     console.log(shot);
     debugger;
     this.props.navigator.push({
       component: ShotDetails,
-      passProps: {shot},
+      passProps: { shot },
       title: shot.title
     });
-  },
-});
+  }
+};
+
+Player.defaultProps = {
+  isModalOpen: false,
+  isLoading: true,
+  dataSource: new ListView.DataSource({
+    rowHasChanged: (row1, row2) => row1 !== row2,
+  })
+};
 
 var styles = StyleSheet.create({
   listStyle: {
@@ -210,5 +226,3 @@ var styles = StyleSheet.create({
     padding: 20
   }
 });
-
-module.exports = Player;
