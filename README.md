@@ -1,3 +1,5 @@
+[![Code Sponsor](https://app.codesponsor.io/embed/jtMnZHip717gzMbuPAbeqRkC/catalinmiron/react-native-dribbble-app.svg)](https://app.codesponsor.io/link/jtMnZHip717gzMbuPAbeqRkC/catalinmiron/react-native-dribbble-app)
+
 <span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=6C3Z8R43HQL8G&lc=RO&item_name=ReactNative%20%2d%20Dribbble%20App&item_number=69&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-green.svg" alt="PayPal donate button" /></a></span>
 
 [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5654dbf613d2b801001aaa4f&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5654dbf613d2b801001aaa4f/build/latest)
