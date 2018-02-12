@@ -4,6 +4,8 @@
 
 [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5654dbf613d2b801001aaa4f&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5654dbf613d2b801001aaa4f/build/latest)
 
+[![reactnative.gallery](https://img.shields.io/badge/reactnative.gallery-%E2%99%A5-red.svg)](https://reactnative.gallery)
+
 ###Dribbble app built with React Native
 
 A [Dribbble](http://dribbble.com) app build with [React Native](https://github.com/facebook/react-native).
