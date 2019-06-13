@@ -1,4 +1,8 @@
-[![Code Sponsor](https://app.codesponsor.io/embed/jtMnZHip717gzMbuPAbeqRkC/catalinmiron/react-native-dribbble-app.svg)](https://app.codesponsor.io/link/jtMnZHip717gzMbuPAbeqRkC/catalinmiron/react-native-dribbble-app)
+### Would you like to support me?
+
+<a href="https://www.buymeacoffee.com/catalinmiron" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+
+----
 
 <span class="badge-paypal"><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=6C3Z8R43HQL8G&lc=RO&item_name=ReactNative%20%2d%20Dribbble%20App&item_number=69&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHostedGuest" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-green.svg" alt="PayPal donate button" /></a></span>
 
