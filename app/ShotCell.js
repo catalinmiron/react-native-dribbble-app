@@ -1,7 +1,7 @@
 "use strict";
 
-var React = require("react-native");
-var {
+import React, {
+  Component,
   Image,
   PixelRatio,
   StyleSheet,
@@ -9,13 +9,16 @@ var {
   TouchableHighlight,
   View,
   Dimensions
-} = React;
+} from 'react-native';
 
-var getImage = require("./helpers/getImage"),
-    screen = Dimensions.get('window');
+import * as getImage from "./helpers/getImage";
+const screen = Dimensions.get('window');
 
-var ShotCell = React.createClass({
-  render: function() {
+export default class ShotCell extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
     return (
       <View>
         <TouchableHighlight onPress={this.props.onSelect}>
@@ -29,11 +32,11 @@ var ShotCell = React.createClass({
         </TouchableHighlight>
         <View style={styles.cellBorder} />
       </View>
-    );
-  }
-});
+    )//return
+  }//render
+};//class
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
   },
@@ -54,5 +57,3 @@ var styles = StyleSheet.create({
     marginLeft: 4,
   },
 });
-
-module.exports = ShotCell;
