@@ -3,28 +3,30 @@
  * Github url: https://github.com/catalinmiron/react-native-dribbble-app
  */
 "use strict";
-
-var React = require("react-native");
-var {
+import React, {
+  Component,
   AppRegistry,
   NavigatorIOS,
   StyleSheet,
   TabBarIOS,
   View,
   Text
-} = React;
+} from 'react-native';
 
-var ShotList = require("./app/ShotList"),
-    Icon = require("react-native-vector-icons/FontAwesome");
+import ShotList from "./app/ShotList";
+const Icon = require("react-native-vector-icons/FontAwesome");
 
-var DribbbleApp = React.createClass({
-  getInitialState: function() {
-    return {
-      selectedTab: "default"
-    };
-  },
+export default class DribbbleApp extends Component {
+  constructor(props) {
+    super(props);
 
-  _renderContent: function(category: string, title: ?string) {
+    this.state = {
+        selectedTab: "default"
+    }
+  }//constructor
+
+  //_renderContent(category: string, title: ?string) {
+  _renderContent(category, title) {
     return (
       <NavigatorIOS style={styles.wrapper}
         initialRoute={{
@@ -34,9 +36,9 @@ var DribbbleApp = React.createClass({
         }}
       />
     );
-  },
+  };
 
-  render: function() {
+  render() {
     return (
       <TabBarIOS tintColor={"#ea4c89"}>
         <Icon.TabBarItem
@@ -88,11 +90,11 @@ var DribbbleApp = React.createClass({
           {this._renderContent("rebounds", "Rebounds")}
         </Icon.TabBarItem>
       </TabBarIOS>
-    );
-  }
-});
+    ) //return
+  } //render
+}//class
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   tabContent: {
     flex: 1,
     alignItems: "center",
@@ -107,5 +109,3 @@ var styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent("DribbbleApp", () => DribbbleApp);
-
-module.exports = DribbbleApp;
